@@ -1,0 +1,48 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}CS343 Lecture 1\vspace{-1ex}}
+\date{January 4th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	\myt{Advanced Control Flow}
+	
+	Things that are required in the course - docked marks.\\
+	\begin{itemize}
+		\item within a routine, basic and advanced control structurs allow virtually any control flow
+		\item multi-exit-loop loop, why would you want to put a break in a loop? We end up with code that is duplicated - change one and forget about the other. For loop can be used to add an index easily for( ;; ) into for( int x = 0;; x++)
+		\item TFW flagism is a thing - don't use flags :O
+		\item eliminiate variables necessary with while
+		\item use labbeled exits, which are pretty cool
+		\item write defensive code - as you add code in the future, how can you reduce the amount of pain then, by coding smart right now?
+		\item only use goto to perform static multi-level exit, eg. simulated labelled break and continue for the eye candy. the break and goto are dangerous except:
+		\begin{itemize}
+			\item cannot loop (only forward branch) therefore only loop constructs branch back
+			\item cannot branch into a control structure
+		\end{itemize}
+	\end{itemize}
+
+	\myt{Dynamic Memory Allocation}
+	
+	\begin{itemize}
+		\item Stack allocation eliminates explicit storage management and often more efficent than heap allocation - "Use the stakc luke skywalker"
+		\item rule of using the heap: 
+		\begin{itemize}
+			\item If the lifetime of the storage exceeds the block that it is declared in, then it must be declared on the heap. Otherwise USE THE STACK
+			\item you might also want to use the heap when the amount of data you read is unknown
+			\item when an array of objects must be initialized via the object's constructor
+			\item when large local variables are allocated on a small stack.
+		\end{itemize}
+	\end{itemize}
+	
+	
+\end{document}

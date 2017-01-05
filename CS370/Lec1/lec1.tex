@@ -1,0 +1,53 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}CS370 Lecture 1\vspace{-1ex}}
+\date{January 4th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	\myt{Five Topics in the Course}
+	\begin{itemize}
+		\item Floating point numbers and Arithmetic
+		\item Iterpolation, Splines, Parametric Curves
+		\item Initial Value Problems - solve differencial equations
+		\item Discrete Fourier Analysis
+		\item Numerical Linear Algebra - solve equations - google pagerank
+	\end{itemize}
+
+	\myt{Topic 1 Floating Point Arithmetic}\\
+	Examples where problems come whehn using approximation\\
+	
+	eg1. $e^{-5.5} = $\\
+	
+	$$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + ... + \frac{x^n}{n!} + ...$$
+	$$e^{-x} = \frac{1}{x}$$
+	$$e^{-5.5} = \frac{1}{e^{5.5}} = \frac{1}{1 + 5.5 + \frac{5.5^2}{2} + ...}$$
+	
+	Now do arithmetic keeping only 5 digits. In both cases infinite sums remain unchanged after 25 terms. There is no sense in going any further - we end up just truncating all of the terms after this as they are smaller than the 5th digit.\\
+	
+	Method 1 gives $e^{-5.5} = 0.0026363$\\
+	Method 2 gives $e^{-5.5} = 0.0040868$\\\\
+	
+	eg2. $ax^2 + bx + c = 0$\\
+	1
+	$$x_1 = \frac{-b +\sqrt{b^2-4ac}}{2a}$$
+	$$x_2 = \frac{-b -\sqrt{b^2-4ac}}{2a}$$
+	2
+	$$x_1 = \frac{2a}{-b +\sqrt{b^2-4ac}}$$
+	$$x_2 = \frac{2a}{-b -\sqrt{b^2-4ac}}$$
+	
+	$$x^2 + 621x + 1 = 0$$
+	use 4 digit arithmetic\\
+	
+	1: $x_1 = -0.200$ $x_2 = 62.1$\\
+	2: $x_1 = -0.0161$ $x_2 = -62.1$\\
+	
+\end{document}

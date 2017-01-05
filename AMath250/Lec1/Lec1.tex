@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Amath 250 Lecture 1\vspace{-1ex}}
+\date{January 4th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	\myt{Intro to Differential Equations (DEs)}\\\\
+	A DE is an equation relating a function to its own derivative(s).\\
+	\underline{Solving} it means identifying the function(s).\\
+	Eg. Solve:\\
+	$$ \frac{dy}{dx} = y$$
+	We can guess the solution:\\\\
+	$$y = e^y$$
+	$$y = Ke^x | \exists K \epsilon R$$
+	(This gives the complete set)\\
+	
+	Eg2:\\
+	$$ y' = xy $$
+	Solution:\\
+	$$ y = Ce^{\frac{1}{2}x^2}$$
+	
+	Terminology:\\
+	We call the family of solutions the \underline{general solution}. A single solution may be called a \underline{particular solution}\\
+	
+	To determine the value of C required to find a particular solution we need an \underline{initial condition}. The value of f(x) at some value of x. A DE with an IC is called an \underline{initial value problem (IVP)}\\
+	
+	Eg1: Solve\\
+	$$y' = y^2, y(0) = 1$$
+	
+	Possible Solution:\\
+	$$y = \frac{-1}{x}$$
+	The General solution is:\\
+	$$y = \frac{-1}{x + c}$$
+	If we set $y(0) = 1$ then $1 = \frac{-1}{c}$ so $c = -1$. The particular solution is:\\
+	$$y = \frac{1}{1-x}$$
+	
+	The \underline{order} of a DE is the order of the highest derivative. \\
+	Eg1 $(y''')^2 = y-1$ is 3rd-order\\
+	Eg2 $\frac{d^2y}{dx^2} + 4\frac{dy}{dx} + 4y = x$ is a 2nd order equation\\
+	We will soon be able to solve this, the solution is:\\
+	$$y = C_1e^{-2x} + C_2xe^{-2x} + \frac{1}{4}(x-1)$$
+	
+	We can \underline{verify} this:\\
+	$$y' = -2C_1e^{-2x} + C_2e^{-2x}-2C_2xe^{-2x} + \frac{1}{4}$$
+	$$y'' = 4C_1e^{-2x} - 2C_2e^{-2x} - 2C_2e^{-2x} + 4C_2xe^{-2x}$$
+	$$y'' + 4y' + 4y = 4C_1e^{-2x}-4C_2e^{-2x} + 4C_2xe^{-2x} +$$ 
+	$$ (-8C_1e^{-2x} +  4C_2e^{-2x} - 8C_2xe^{-2x} + 1) + (4C_1e^{-2x} + 4C_2xe^{-2x} + x - 1) = x$$
+	
+	Cancel out the terms and that is how we just get x\\
+	
+	
+	
+	
+\end{document}
