@@ -13,7 +13,7 @@
 
 \begin{document}
 	\maketitle
-	\myt{Five Topics in the Course}
+	\myt{Five Topics in the Course (Jan 4th)}
 	\begin{itemize}
 		\item Floating point numbers and Arithmetic
 		\item Iterpolation, Splines, Parametric Curves
@@ -22,7 +22,7 @@
 		\item Numerical Linear Algebra - solve equations - google pagerank
 	\end{itemize}
 
-	\myt{Topic 1 Floating Point Arithmetic}\\
+	\section*{Topic 1: Floating Point Arithmetic}
 	Examples where problems come whehn using approximation\\
 	
 	eg1. $e^{-5.5} = $\\
@@ -50,4 +50,74 @@
 	1: $x_1 = -0.200$ $x_2 = 62.1$\\
 	2: $x_1 = -0.0161$ $x_2 = -62.1$\\
 	
+	\subsection*{Floating point number systems (Jan 6th)}
+	
+	$$F(\beta , t, L, u)$$
+	Floating point number is either\\
+	$$0 +/- 0.x_1x_2...x_t$$
+	Where $x_n$ is a digit\\
+	\begin{itemize}
+		\item $x_1 \ne 0$
+		\item $0 \le x_i \textless\beta$
+		\item $L \le d \le u$
+	\end{itemize}
+	
+	eg $F(10, 6, L, u)$ for $\pi = 0.314519 x 10^1$\\
+	
+	Single Precision: [+/-][8 bits][23 digits] F(2, 24, -126, 127)\\
+	Double Precision: [+/-][11 bits][52 digits] F(2, 53, -1022, 1023)\\
+	
+	Given any real number:
+	$$+/- 0.x_1x_2...x_tx_{t+1}...x\beta ^d$$
+	you can truncate (rounding possible):
+	$$fl(x) = +/- 0.x_1x_2...x_t$$
+	
+	\myt{Question:} How close is fl(x) to x? Relatively!\\
+	
+	$$\delta = \frac{fl(x) - x}{x}$$
+	Claim: $|\delta| \textless \beta^{1-t}$ when truncating and $|\delta| \textless \frac{1}{2}\beta^{1-t}$ when rounding (Let this definition be $\epsilon$)
+	
+	Trucating:
+	$$|\delta| = \frac{0.00...0x_{t+1}...x\beta^d}{0.x_1x_2...x\beta^d}$$
+	$$|\delta| = \frac{0.x_{t+1}x_{t+2}...x\beta^{-t}}{x_1.x_2x_3...x\beta^{-1}}$$
+	$$|\delta| \textless \beta^{1-t}$$
+	
+	In general $|\delta| \textless \epsilon$\\
+	
+	$$fl(x) = x(1 + \delta)$$
+	$$|\delta| \textless \epsilon$$
+	
+	What about arithmetic an errors?\\
+	
+	x,y real\\
+	$x \oplus y = $
+	
+	eg.
+	$x = 0.1111...$ F(2,4,L,u)\\
+	$y = 0.1110...$\\
+	
+	$fl(x) = 0.1111$\\
+	$fl(y) = 0.1110$\\
+	when adding them: $1.1101$ then truncate to $0.1110 \times 2^1$\\
+	
+	x,y real\\
+	$x \oplus y = fl(fl(x) + fl(y))$
+	
+	$$|\frac{x \oplus y - (x + y)}{x + y}|$$
+	$$ = |\frac{fl(fl(x) + fl(y)) - (x + y)}{x + y}|$$
+	since $|\delta_1| < \epsilon$ and $|\delta_2| < \epsilon$ and $|\delta_3| < \epsilon$\\
+	$$=|\frac{(x(1 + \delta_1) + y(1+\delta_2))(1+\delta_3) - (x+y)}{x + y}|$$
+	$$|\frac{x + y + x\delta_1 + y\delta_2 + x\delta_3 + y\delta_3 + x\delta_1\delta_3 + y\delta_2\delta_3 - x - y}{x+y}|$$
+	$$|\frac{x\delta_1 + y\delta_2 + x\delta_3 + y\delta_3 + x\delta_1\delta_3 + y\delta_2\delta_3}{x+y}|$$
+	$$\le \frac{|x||\delta_1| + |y||\delta_2| + |x||\delta_3| + |x||\delta_1||\delta_3| + |y||\delta_2\delta_3|}{|x+y|}$$
+	Since $|a+b| \le |a|+|b|$ and $|a \times b| = |a||b|$
+	$$< \frac{(|x| + |y|)}{|x+y|}(2\epsilon + \epsilon^2)$$
+	$$|\frac{x\oplus y - (x+y)}{x+y}|$$
+	$$ < \frac{|x| + |y|}{|x+y|}(2\epsilon + \epsilon^2)$$
+	
+	If x and y have the same sign then $|x + y| = |x| + |y|$ and so addition has relative error bounded by $2\epsilon + \epsilon^2$\\
+	
+	But if x and y are of opposite sign and perhaps of nearly the same size:
+	$$\frac{|x| + |y|}{|x + y|}$$
+	CATASTROPHIC CANCELLATION - Subtraction is deadly.
 \end{document}

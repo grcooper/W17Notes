@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Amath 250 Lecture 2\vspace{-1ex}}
+\date{January 4th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	\myt{Seperable Equations}\\
+	
+	A Differential equation $\frac{dy}{dx} = f(x,y)$ said to be \underline{seperable} if $f(x)$ can be factored as $f(x,y) = g(x)h(y)$\\
+	
+	In these cases we have $\frac{dy}{dx} = g(x)h(y)$, and dividing by $h(y)$ gives:\\ $$\frac{1}{h(y)}\frac{dy}{dx} = g(x)$$
+	Integrating both sides with respect to x gives\\
+	$$\int \frac{1}{h(y)} \frac{dy}{dx}dx = \int g(x)dx$$
+	
+	That is:\\
+	
+	$$\int \frac{1}{h(y)}dy = \int g(x)dx$$
+	
+	If we can find antiderivatives and solve for y, we'll have our solution.
+		
+	Aside (substitution?):\\
+	
+	$$\int \frac{1}{h(y)}\frac{dy}{dx}$$
+	let u = y $du = \frac{dy}{dx}dx$\\
+	$$= \int \frac{1}{h(u)}du$$
+	$$= \int \frac{h(y)}dy$$
+	
+	Example: solve $\frac{dy}{dx} = e^{x+y}$\\
+	
+	This is $\frac{dy}{dx} = d^xe^y$\\
+	Trating dy and dx as differentials and seperating the variables we get $\frac{dy}{e^y} = e^xdx$\\
+	Summing both sides, we have $\int e^{-y}dy = \int e^ydx$\\
+	
+	Integrate:\\
+	$$-e^{-y} = e^x + c$$
+	sovle for y:\\
+	$$e^{-y} = -e^x + c_1 (c_1 = -c)$$
+	$$-y = ln(c_1 - e^x)$$
+	$$y = -ln(c_1 - e^x)$$
+	$$= ln[\frac{1}{c_1 - e^x}]$$
+	
+	Check our answer?:\\
+	$$y = ln[\frac{1}{c_1 - e^x}]$$
+	$$(c_1 - e^x)[-(\frac{1}{c_1 - e^x})]^2(-e)^x = \frac{e^x}{c_1 - e^x}$$
+	$$e^{x+y} = e^xe^y = e^x[\frac{1}{c_1-e^x}] = \frac{e^x}{c_1 - e^x} = \frac{dy}{dx}$$
+	
+	What if we need the particular solution passing through (0,0)?\\
+	From $-e^{-y} = e^x + c$, setting x = y = 0 gives $c = -2$ so $c_1 = 2$, and $y = ln[\frac{1}{2-e^x}]$
+	
+	You will always have multiple curves, we will want to find the curve that solves for the points given. See image 2.1, the red line is the correct one.\\\\
+	
+	\myt{One problem to watch for}\\
+	
+	When seperating variables, we may losee certain "singular" solutions.\\
+	Eg. Consider: $\frac{dy}{dx} = -4xy^2$\\
+	We may write (if $y != 0$)\\
+	$$\int \frac{dy}{y^2} = -\int 4xdx$$
+	$$\frac{-1}{y} = -2x^2 + c$$
+	$$y = \frac{1}{2x^2-c}$$
+	
+	This is the general solution, and yet y = 0 is \underline{also} a solution\\
+	
+	\myt{First-Order Linear Equations}\\
+	
+	A first-order Differential equation is said to be \underline{linear} if it is of the form $a_1(x)\frac{dy}{dx} + a_0(x)y = f(x)$\\
+	
+	To motivate our method of solution, consider the special case where $a_0x = a_1'(x)$. 
+	$$a_1y' + a_1'y = f(x)$$
+	
+	We recognize the LHS as $\frac{d}{dx}[a_1(x)y(x)]$\\
+	$$\frac{d}{dx}[a_1y] = f(x)$$
+	$$a_1y = \int f(x)dx$$
+	$$y(x) = \frac{1}{a_1(x)}\int f(x)dx$$
+	
+	What if $a_0 \ne a_1'$? We can actually \underline{create} this structure! We'll multiply through by another function I(x) (an integrating factor).\\
+	\textbf{Step 1} Divide trhough by $a_1(x)$ to get:\\
+	$$\frac{dy}{dx} + k(x)y = g(x)$$
+	Where $k = \frac{a_0}{a_1}$ and $g = \frac{f}{a_1}$\\
+	This is referred to as the \underline{standard form} of a linear first-order differential equation\\
+	
+	\textbf{Step 2} Multiply through by the (unknown) factor I(x)\\
+	$$I(x)\frac{dy}{dx} + I(x)k(x)y = I(x)g(x)$$
+	Now we want $I(x)k(x)$ to be equal to $\frac{dI}{dx}$\\
+	ie:
+	$$ \frac{dI}{dx} = KI$$
+	$$\int\frac{dI}{I} = \int K(x)dx$$
+	$$ln|I| = \int K(x)dx$$
+	$$|I| = e^{\int K(x)dx}$$
+	$$I = e^{\int K(x)dx}$$
+	(aside) $e^{H(x) + c} = e^ce^{H(x)}$ so we can remove the absolutes?\\
+	We now have:\\
+	$$\frac{d}{dx}[Iy] = I(x)g(x)$$
+	$$y = \frac{1}{I(x)}\int I(x)g(x)dx$$
+	where $I = e^{\int k(x)dx}$\\
+	
+\end{document}
