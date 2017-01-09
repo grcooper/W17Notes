@@ -103,4 +103,60 @@
 	$$y = \frac{1}{I(x)}\int I(x)g(x)dx$$
 	where $I = e^{\int k(x)dx}$\\
 	
+	\myt{Jan 9th:}
+	$$a_1(x)\frac{dy}{dx} + a_0(x)y = f(x)$$
+	
+	\begin{enumerate}
+		\item Put the equation in standard form: $\frac{dy}{dx} + k(x)y = g(x)$
+		\item Find the integrating factor \\
+		$I(x) = e^{\int k(x)dx}$\\
+		$= e^{K(x) + C}$\\
+		$= e^ce^{K(x)}$\\
+		\item Factor this into the equation, and recall that the LHS must be $\frac{d}{dx}(I(x)y(x))$\\
+		$I(x)\frac{dy}{dx} + I(x)k(x)y = I(x)g(x)$\\
+		$\frac{d}{dx}(Iy) = I(x)g(x)$
+	\end{enumerate}
+
+	\myt{examples:}\\
+	1.\\
+	$\frac{dy}{dx} + xy = x$ (already in standard form)\\
+	An integrating factor is $I(x) = e^{\int k(x)dx} = e^{\int xdx} = e^{\frac{1}{2}x^2}$\\
+	
+	Incorporating this, we have:\\
+	$$e^{\frac{1}{2}x^2}\frac{dy}{dx} + xe^{\frac{1}{2}x^2}y = xe^{\frac{1}{2}x^2}$$
+	$$\frac{d}{dx}(e^{\frac{1}{2}x^2}y) = xe^{\frac{1}{2}x^2}$$
+	
+	Make sure we have the correct integrating factor, make sure that the above is the derivative of the line below. CHECK THIS ALWAYS.
+	
+	$$e^{\frac{1}{2}x^2}y = \int xe^{\frac{1}{2}x^2}dx$$
+	$$= e^{\frac{1}{2}x^2} + c$$
+	$$=> y = 1 + Ce^{-\frac{1}{2}x^2}$$
+	
+	2.\\
+	
+	$$xlnx\frac{dy}{dx} + y - x^3lnx = 0$$
+	(assume $x > 1$)\\
+	In standard form:\\
+	$$\frac{dy}{dx} + \frac{y}{xlnx} = x^2$$
+	Int. Factor: $I(x) = e^{\int \frac{1}{xlnx}dx}$\\
+	$= |lnx| = lnx $(since x $>$ 1) (see below how we found this)\\
+	$$\int \frac{1}{xlnx}dx$$
+	$$= \int \frac{1}{u} du$$
+	$$= ln|u| + c$$
+	$$= ln|lnx| + c$$
+	
+	\_\_\_\_\_\_\_
+	
+	$$lnx\frac{dy}{dx} + \frac{y}{x} = x^2lnx$$
+	$$\frac{d}{dx}((lnx)y) = x^2lnx$$
+	Check?
+	$$ylnx = \int x^2lnxdx$$
+	$$ylnx = uv - \int vdu$$
+	$$= \frac{1}{3}x^3lnx - \int \frac{x^2}{3}dx$$
+	$$= \frac{1}{3}x^3lnx = \frac{x^3}{9} + C$$
+	$$y = \frac{1}{3}x^3 - \frac{x^3}{9lnx} + \frac{c}{lnx}$$
+	
+	where above, $u = lnx$ $du = \frac{1}{x}dx$ $dv = x^2dx$ $v = \frac{1}{3}x^3$\\
+	
+	
 \end{document}

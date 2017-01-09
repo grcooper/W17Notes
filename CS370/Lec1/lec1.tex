@@ -120,4 +120,90 @@
 	But if x and y are of opposite sign and perhaps of nearly the same size:
 	$$\frac{|x| + |y|}{|x + y|}$$
 	CATASTROPHIC CANCELLATION - Subtraction is deadly.
+	
+	\myt{Jan 9th:}
+	
+	Recall: $F(\beta, t, L, u)$\\
+	For any non-zero real number\\
+	$x = 0.x_1x_2...x\beta^d$\\
+	$fl(x) = 0.x_1x_2...x_t$ then the exponent $x\beta^d$\\
+	
+	We should the magnitude of the error:\\
+	$\delta = \frac{fl(x) - x}{x}$\\
+	showed: $|\delta| < \epsilon = \beta^{1-t}$ or $\epsilon = \frac{1}{2}\beta^{1-t}$\\
+	$\epsilon$ is called machine epsilon.\\
+	
+	$fl(x) = x \dot (1 + \delta)$ where $|\delta| < \epsilon$\\
+	
+	\subsection*{Operations}
+	If x and y are two real numbers\\
+	$x \oplus y = fl(fl(x) + fl(x))$\\
+	
+	$$|\frac{(x \oplus y) - (x + y)}{x+y} < (2\epsilon + \epsilon^2)(\frac{|x| + |y|}{|x+y|})$$
+	
+	Notice: if x and y are of the same sign then relative error of addition $< 2\epsilon + \epsilon^2$\\
+	
+	If x and y are of opposite sign and $x + y \approx 0$ then the upper bound can be significant. This is called catastrophic cancellation\\
+	
+	$$x = 0.x_1x_2...x_t...x\beta^d$$
+	$$y = -0.x_1x_2...\hat{x}_t...x\beta^d$$
+	Subtracted $ = 0.0.....0?$ with exponent $x\beta^d$\\
+	
+	$$x =  0.1239...1231$$
+	$$y = -0.1229...1221$$
+	Subtracted $= 0.0010$\\
+	
+	$$e^{-5.5} = 1 - 5.5 + \frac{5.5^2}{2} - \frac{5.5^3}{6} + ... = x - \hat{x}$$
+	$$e^{-5.5} = \frac{1}{e^{5.5}} = \frac{1}{1 + 5.5 + \frac{5.5^2}{2} + ...}$$	
+	
+	\subsection*{Numerical Algorithm Issues}
+	
+	\myt{Problem}: given $\alpha$ Solve numerically:\\
+	
+	$$I_n = \int_{0}^{1}\frac{x^n}{x+\alpha}dx$$
+	n = 0,1,2...\\
+
+	\myt{Method}\\
+	$$I_0 = \int_{0}^{1}\frac{1}{x+\alpha}dx = ln(x+\alpha)|_0^1$$
+	$$ = ln(1+\alpha) - ln(\alpha) = ln(\frac{1+\alpha}{\alpha})$$
+	$$I_n = \frac{1}{n} - \alpha I_{n-1}$$
+	For $n \ge 1$:\\
+	$$I_n = \int_{0}^{1}\frac{x^{n-1}(x + \alpha - \alpha)}{x+\alpha}dx$$
+	$$= \int_{0}*{1}x^{n-1}dx - \alpha\int_{0}^{1}\frac{x^{n-1}}{x+\alpha}dx$$
+	
+	$\alpha = 0.5$\\
+	$$I_0 = ln(3) = 1.09861228866..$$
+	$$I_0^app = 1.098612$$
+	$$I_100^app = 0.00664$$
+	
+	$\alpha = 2.0$\\
+	$$I_0 = ln(1.5) = 0.405465108108..$$
+	$$I_0^app = 0.4054654$$
+	$$I_100^app = 2.1 \times 10^{22}$$
+	
+	He used his own application and went through the solutions to the above. They are incorrect :S\\
+	
+	Math: $I_0, I_n = \frac{1}{n} - \alpha I_{n-1}$\\
+	CS: $I_0^{app}, I_n^{app} = \frac{1}{n} - \alpha I_{n-1}^{app}$\\
+	
+	$e_0 = I_0 - I_0^{app} = (\frac{1}{n} - \alpha I_{n-1}) - (\frac{1}{n} - \alpha I_{n-1}^{app})$\\
+	$= -\alpha I_{n} + \alpha I_{n-1}^{app} = -\alpha e_{n-1}$\\
+	
+	$$e_n = \alpha e_{n-1}$$
+	$$= \alpha^2 e_{n-2}$$
+	$$= - \alpha^3 e_{n-3}$$
+	$$...$$
+	$$= (-\alpha)^ne_0$$
+	
+	IF $|\alpha| < 1$ then $|e_n| \rightarrow 0$ as $n \rightarrow \infty$ stable\\
+	$|\alpha| > 1$ then $|e_n| \rightarrow \infty$ is $n \rightarrow \infty$ unstable!!!\\
+	
+	When $|\alpha| > 1$ then we can work backwards!\\
+	$$I_{200}, I_{199}, ..., I_{101}I_{100}$$
+	$$I_{n-1} = \frac{1}{\alpha n} - \frac{1}{\alpha}I_n$$
+	$$e_{n-1} = \frac{1}{2}e_n$$
+	$$|e_{199}| = \frac{1}{|\alpha|}|e_{200}|$$
+	$$|e_{100}| = \frac{1}{|\alpha|^{100}}|e_{200}|$$
+	
+	
 \end{document}
