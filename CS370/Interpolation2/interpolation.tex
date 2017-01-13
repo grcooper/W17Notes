@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{\vspace{-15ex}CS370: Interpolation \vspace{-1ex}}
+\date{January 11th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	See figure 2.1\\
+	
+	$$y = p(x)$$
+	We want to find a function p, such that the curve is 'nice' (where nice is \underline{piecewise polynomial} or \underline{polynomial})\\
+	
+	Given:\\
+	$(x_1, y_1), (x_2,y_2)...,(x_n, y_n)$ n points $ x_1 < x_2 < ... < x_n$\\
+	
+	Find a polynomial P(x) of degree $< n$\\
+	In general:\\
+	$$p(x) = c_1 + c_2x + c_3x^2 + ... + c_nx^{n-1}$$
+	$$p(x_1) = y_1$$
+	$$p(x_2) = y_2$$
+	$$...$$
+	$$p(x_n) = y_n$$
+	
+	n unknowns, n equations (linear)\\
+	
+	\myt{Example:}\\
+	$(-1, 1), (1,1), (2,5), (4,1)$\\
+	See figure 2.2\\
+	
+	$$p(x) = c_1 + c_2x + c_3x^2 + c_4x^3$$
+	$$p(-1) = c_1 - c_2 + c_3 - c_4 = 1$$
+	$$p(1) = c_1 + c_2 + c_3 + c_4 = 1$$
+	$$p(2) = c_1 + 2c_2 + 4c_3 + 8c_4 = 5$$
+	$$p(4) = c_1 + 4c_2 + 16c_3 + 64c_4 = 1$$
+	
+	$
+	\begin{Bmatrix}
+		1 & -1 & 1 & -1 & | & 1 \\
+		1 & 1 & 1 & 1 & | & 1 \\
+		1 & 2 & 4 & 8 & | & 5 \\
+		1 & 4 & 16 & 64 & | & 1
+	\end{Bmatrix}
+	$//
+	Solve the matrix!!\\
+	
+	Now we are just writing out the solution...\\
+	$$p(x) = c_1 + c_2x + c_3x^2 + c_4x^3$$
+	$$= 1 + b_2(x-1)+b_3(x-1)^2+b_4(x-1)^3$$
+	$$= L_1(x) + L_2(x) + 5L_3(x) + L_4(x)$$
+	
+	$$L_1(x) = \frac{(x-1)(x-2)(x-4)}{-30}$$
+	$$L_2(x) = \frac{(x+1)(x-2)(x-4)}{6}$$
+	$$L_3(x) = \frac{(x+1)(x-1)(x-4)}{-6}$$
+	$$L_4(x) = \frac{(x+1)(x-1)(x-2)}{30}$$
+	
+	I think we are writing it out this way so that we can easily plug in the vlues and get the correct points??
+	
+	Question:\\
+	\begin{enumerate}
+		\item Does an interpolating polynomial always exist?
+		\item If (1) is true then is the answer always unique?
+	\end{enumerate}
+
+	$$p(x) = c_1 + c_2x + ... c_nx^{n-1}$$
+	$$p(x_1) = c_1 + c_2x_1 + ... c_nx_1^{n-1}$$
+	$$p(x_2) = c_1 + c_2x_2 + ... c_nx_2^{n-1}$$
+	$$...$$
+	$$p(x_n) = c_1 + c_2x_n + ... c_nx_n^{n-1}$$
+	
+	$
+	\begin{Bmatrix}
+		1 & x_1 & x_1^2 & ... & x_1^{n-1} \\
+		1 & x_2 & x_2^2 & ... & x_2^{n-1} \\
+		... & ... & ... & ... & ... \\
+		1 & x_n & x_n^2 & ... & x_n^{n-1} \\
+	\end{Bmatrix}
+	\begin{Bmatrix}
+		c_1 \\ c_2 \\ ... \\ c_n
+	\end{Bmatrix}
+	 = 
+	 \begin{Bmatrix}
+		 y_1 \\ y_2 \\ ... \\ y_n
+	 \end{Bmatrix}
+	$
+	
+	The first matrix is the vandermonde (V) matrix.\\
+	V is invertable, $V \times \overrightarrow{c} = \overrightarrow{y}$\\
+	det $V \ne 0$ and det $V = \pi(x_i - x_j) \ne 0$ for $i < j$\\
+	
+	Remember what a determinate is, remember what invertible is, but we will never be asked to do it.\\
+	
+	$p(x)$
+	$$p(x) = q_1(x)(x-x_1) + y_1$$
+	$$p(x) = q_2(x)(x-x_2) + y_2$$
+	$$...$$
+	$$p(x) = q_n(x)(x-x_n) + y_n$$
+	
+	\subsection*{Lagrange Polynomial}
+	
+	$$(x_1, y_1), (x_2,y_2)...(x_n,y_n)$$
+	$$p(x) = y_1L_1(x) + y_2L_2(x) + ... + y_nL_n(x)$$
+	
+	$L_i(x_i) = 1, L_i(x_j) = 0$ for $i \ne j$ and $deg(L_i) = n-1$\\
+	Lets construct $L_1$ using the above\\
+	$$L_1(x) = \frac{(x-x_2)(x-x_3)...(x-x_n)}{(x_1-x_2)(x_1-x_3)...(x_1-x_n)}$$
+	
+	$$L_i(x) = \frac{(x-x_1)...(x-x_{i-1})(x-x_{i+1})...(x-x_n)}{(x_i-x_1)...(x_i-x_{i-1})...(x_i-x_n)}$$
+	$L_i(x_i) = 1$ and $L_j(x_j) = 0$ where $j \ne i$\\
+	
+	
+	
+\end{document}

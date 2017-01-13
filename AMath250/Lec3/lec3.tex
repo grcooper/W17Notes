@@ -39,7 +39,68 @@
 		\item in fact, $\frac{dy}{dx} \ne 0$ when $y \approx +/-2$, and $|\frac{dy}{dx}|$ increases with distance from $y = +/-2$
 	\end{itemize}
 
+	Inflection points?
+	
+	If $\frac{dy}{dx} = y^2 - 4$ then $\frac{d^2y}{dx^2} = 2y\frac{dy}{dx} = 2y(y^2 - 4)$\\
+	There is a line of inlection points along the x-axis\\
+	
+	Of course we \underline{can} solve this DE.\\
+	
+	$$\frac{dy}{dx} = y^2 - 4$$
+	$$\int \frac{dy}{y^2-4} = \int dx$$
+	$$\frac{1}{4} \int (\frac{1}{y-2} - \frac{1}{y+2})dy = x + c_1$$
+	$$ln|y-2| - ln|y+2| = 4x + 4c_1$$
+	$$ln|\frac{y-2}{y+2} = 4x + c_2$$
+	$$|\frac{y-2}{y+2}| = e^{4x+c_2}$$
+	$$= e^{c_2}e^{4x}$$
+	$$\frac{y-2}{y+2} = c_3e^{4x}$$
+	$$y-2 = c_3(y+2)e^{4x}$$
+	$$y(1-c_3e^{4x}) = 2 + 2c_3e^{4x}$$
+	$$y = 2(\frac{1 + Ce^{4x}}{1-Ce^{4x}})$$
+	
+	Partial fraction decomposition for above:\\
+	$$\frac{1}{y^2-4} = \frac{A}{y+2} + \frac{B}{y-2}$$
+	$$1 = A(y-2) + B(y+2)$$
+	Setting $y=2$ gives $B = \frac{1}{4}$\\
+	Setting $y=-2$ gives $A = -\frac{1}{4}$\\
+	
+	The solution will have verticle asymptotes when:\\
+	$$1-Ce^{4x} = 0$$
+	ie $x = \frac{1}{4}ln(\frac{1}{c}) = -\frac{1}{4}lnC$\\
+	(see figure 3.1)
+	
+	\subsection*{Guidelines for sketching}
+	\begin{itemize}
+		\item solve the DE if possible
+		\item Identify any "exceptional" solutions. These may be singular solutions or equilibrium solutions, or other. for linear equations, setting $C = 0$ will usually yield an exceptional solution
+		\item Consider the behaviour of other solutions as $x \rightarrow \pm \infty$ or near vertical asymptotes
+		\item For more detail, find out where $y' = 0$. This will give you a curve, called the horizontal isocline, on which every solution to the DE has a horizontal tangent
+		\item (optional: do the same with $y''$)
+	\end{itemize}
 
+	\myt{Example:}\\
+	Consider the DE $\frac{dx}{dy} = y - x^2$\\
+	In standard form: $y' - y = -x^2$\\
+	Int. Factor: $I(x) = e^{\int K(x)dx} = e^{-\int dx}$\\
+	Factor this in:\\
+	$$e^{-x}\frac{dy}{dx} - ye^{-x} = -x^2e6{-x}$$
+	$$\frac{d}{dx}ye^{-x} = -x^2e^{-x}$$
+	$$ye^{-x} = -\int x^2e^{-x}dx$$
+	$$= ... = e^{-x}(x^2 + 2x+2) + C$$
+	Need to take double integral above, but we skip that step\\
+	$$y = x^2 2x + 2 + Ce^x$$
+	Exceptional solutions? $C = 0$ gives a parabola: $y = x^2 + 2x + 2 = (x+1)^2 + 1$\\
+	
+	(See figure 3.2)\\
+	
+	How do the other solutions relate to this?\\
+	Well, $Ce^x \rightarrow 0$ as $x \rightarrow -\infty$, so every solution approaches the parabola asymptotically as $x \rightarrow -\infty$.\\
+	As $x \rightarrow \infty$, $Ce^x \rightarrow \pm \infty$ (Depending on the sign of C), so the olutions diverge from the parabola\\
+	
+	Critical points? (horizontal isocline?)\\
+	$$\frac{dy}{dx} = 0 \rightarrow y = x^2$$
+	
+	(see figure 3.3) the red is the isocline and that is wehre points will change direction/where there will be critical points. 
 	
 	
 	
