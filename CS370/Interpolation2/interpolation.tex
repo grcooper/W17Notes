@@ -117,6 +117,94 @@
 	$$L_i(x) = \frac{(x-x_1)...(x-x_{i-1})(x-x_{i+1})...(x-x_n)}{(x_i-x_1)...(x_i-x_{i-1})...(x_i-x_n)}$$
 	$L_i(x_i) = 1$ and $L_j(x_j) = 0$ where $j \ne i$\\
 	
+	For A1 Q3 (January 13th) - figuring out the solution to the recurrence - and using the answer to help\\
+	$$?? \boxed{I_n} \leftarrow I_{n-1} \leftarrow I_{n-2} \leftarrow ... \leftarrow I_0$$
+	$$\checkmark \boxed{\hat{I_n}} \leftarrow \hat{I_{n-1}} \leftarrow ... \leftarrow \hat{I_1} \leftarrow \hat{I_0}$$
+	$$e_n \leftarrow e_{n-1} \leftarrow ... \leftarrow e_1 \leftarrow e_0$$
+	$$e_n = (-\alpha)^ne_0$$
+	$$I_n ?= formula(I_0) = $$
+	
+	Using p?\\
+	$$?? \boxed{p_n} \leftarrow p_{n-1} p_{n-2}, p_{n-2}p_{n-3}, ..., p_1, p_0$$
+	$p_n = as^n + bt^n$ and $a,b$ depend on $p_0, p_1$\\
+	$$\checkmark \boxed{\hat{p_n}} \leftarrow \hat{p_{n-1}} \hat{p_{n-2}} ..., \hat{p_1}\hat{p_0}$$
+	This line but with hats (I got lazy)  $p_n = as^n + bt^n$ and $a,b$ depend on $p_0, p_1$\\
+	solve for $e_n$\\
+	
+	Recall from Jan 11th: (regoing over the start of this page)\\
+	
+	\subsection*{Lagrange Form (again)}
+	For $x_1, x_2, ... x_n$ distinct, construct $L_1(x), L_2(x)...L_n(x)$\\
+	Satisfying:\\
+	\begin{enumerate}
+		\item $L_i(x)$ has degree n-1
+		\item $L_i(x_i) = 1$
+		\item $L_i(x_j) = 0$ if $i \ne j$
+	\end{enumerate}
+
+	How do we construct this:\\
+	$$L_1(x) = \frac{(x-x_2)(x-x_3)...(x-x_n)}{(x_1-x_2)(x_1-x_3)...(x_1-x_n)}$$
+	We divide like this in order to get an equation that satisfies that if we plug in $x_1$ we will end up getting 1 as required, otherwise we will be getting a 0. This is actually pretty cool. Neat!\\
+	
+	$$L_i(x) = \frac{(x-x_1)...(x-x_{i-i})(x-x_{i+1})...(x-x_n)}{(x_i-x_1)...(x_i-x_{i-1})(x_i-x_{i+1})...(x_i-x_n)}$$
+	
+	$$p(x) = y_1L_1(x) + y_2L_2(x) + ... + y_nL_n(x)$$
+	$$p(x_1) = y_11 + y_20 + ... + y_n0 = y_1$$
+	$$...$$
+	$$p(x_n) = y_10 + y_20 + ... + y_n1 = y_n$$
+	
+	A question that he often has asked on midterms ( and is almost 100\% going to add it to ours):\\
+	Given: $x_1,x_2,x_3x_4$ as $-1,1,2,117,412$\\
+	Form $p(x) = L_1(x) + L_2(x) + L_3(x) + L_4(x)$\\
+	Write $p(x) = c_1 + c_2x + c_3x^2 + c_4x^3$\\
+	
+	Draw the graph!\\
+	Solve for the 4 numbers, and find what is y at each of the 4 points?\\
+	Then we find out that f(x) = 1 for each\\
+	Therefore the solution is p(x) = 1\\
+	
+	\subsection*{Cubic Hermite Interpolation}
+	Another type of interpolation\\
+	
+	Given: $(x_L, y_L)$ more on the left side and $(x_R, y_R)$ on the right side, $S_L$ slope of the left side, and $S_R$ the slope of the right side\\
+	
+	$p(x)$ has degree at most 3 since we have 4 uknowns\\
+	$p(x_L) = y_L$, $p(x_R) = y_R$, $p'(x_L) S_L$, $p'(x_R) = S_R$\\
+	
+	$p(x) = c_1 + c_2(x-x_L) + c_3(x-x_L)^2 + c_4(x-x_L)^3$
+	$p'(x) = c_2 + 2c_3(x-x_L) + 3c_4(x-x_L)^2$
+	$p(x_L) = y_L \implies c_1$
+	$p'(x_L) = S_L \implies c_2$
+	$p(x_R) = y_R \implies c_1 + c_2\Delta x + c_3\Delta x^2 + c_4 \Delta x^3 = y_R$
+	$p'(x_R) = S_R \implies c_2 + 2c_3\Delta x + 3c_4\Delta x^2 = S_R$
+	where $\Delta x = x_R - x_L$
+	
+	$
+	\begin{Bmatrix}
+	 1 & 0 & 0 & 0 & | & Y_L \\
+	 0 & 1 & 0 & 0 & | & S_L \\
+	 1 & \Delta x & \Delta x^2 & \Delta x^3 & | & Y_R \\
+	 0 & 1 & 2\Delta x & 3\Delta x^2 & | & S_L \\
+	\end{Bmatrix}
+	$\\
+	becomes\\ 	
+	$
+	\begin{Bmatrix}
+	1 & 0 & 0 & 0 & | & Y_L \\
+	0 & 1 & 0 & 0 & | & S_L \\
+	0 & 0 & 1 & 0 & | & \frac{3Y_R' - 2S_L - S_R}{\Delta x} \\
+	0 & 0 & 0 & 1 & | & \frac{S_R + S_L - 2y_L'}{\Delta x^2} \\
+	\end{Bmatrix}
+	$
+	
+	$$c_1 = y_L$$
+	$$c_2 = S_L$$
+	$$c_3 = \frac{3Y_R' - 2S_L - S_R}{\Delta x}$$
+	$$c_4 = \frac{S_R + S_L - 2y_L'}{\Delta x^2}$$
+	
+	Sub into p(x)\\
+	$$p(x) = 3 - (x-1) + 3(x-1)^2 - (x-1)^3$$
+	
 	
 	
 \end{document}

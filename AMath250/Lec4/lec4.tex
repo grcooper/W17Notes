@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}The Principle of Superposition\vspace{-1ex}}
+\date{January 13th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	\section*{The principle of superposition}
+	This is the defining characteristic of linear systems:\\
+	If $y_1$ is a solution to $y' + k(x)y = f_1(x)$\\
+	and $y_2$ is a solution to $y' + k(x)y = f_2(x)$\\
+	then $y_1 + y_2$ is a solution to $y' + k(x)y = f_1(x) + f_2(x)$\\
+	
+	\myt{Proof}:\\
+	IF $y_1$ and $y_2$ are as described thenL\\
+	$$(y_1 + y_2)' + k(x)(y_1 + y_2) = y_1'+k(x)y_1 + y_2' + k(x)y_2$$
+	$$ = f_1(x) + f_2(x)$$
+	
+	We are used to using x as input and finding y. With differentials we have a differn way to look at it. We can look at the function on the right as the input. We can decide the function f(x) on the righthand side which then determines what y becomes.\\
+	
+	A special case:\\
+	If $y_h$ is a solution to $y' + k(x)y = 0$\\
+	and $y_p$ is a solution to $y' + k(x)y = f(x)$\\
+	then $y_h + y_p$ is also a solution to $y' + k(x)y = f(x)$\\
+	
+	Note: we call the two equations \underline{homogeneous} and \underline{inhomogeneous}, respectively.\\
+	
+	Now consider two other observations:\\
+	\begin{itemize}
+		\item If k(x) is a constant, then we find $y_n$ by inspection
+		$$\frac{dy}{dx} + ky = 0 \rightarrow y_n = Ce^{-kx}$$
+		\item The general solution to a first order equation needs one constant of integration
+	\end{itemize}
+
+	These suggest another method for solving linear equations (usdful if k(x) is constant)\\
+	
+	\myt{TO SOLVE:} $\frac{dy}{dx} + ky = f(x)$\\
+	\begin{enumerate}
+		\item Find $y_n$ (by inspection): $y = Ce^{-kx}$
+		\item Find $y_p$ any particular solution to the inhomogeneous DE
+		\item The general solution to the full DE will be $y = y_n + y_p$
+	\end{enumerate}
+
+	How do we find $y_p$?\\
+	- we can often guess its form!\\
+	
+	\subsection*{The method of undetermined Coefficients}
+	\myt{Example 1}\\
+	$$\frac{dy}{dx} = 2y = e^{3x}$$
+	The solution to the homogeneous equation $y' = 2y = 0$ is $y_h = Ce^{-2x}$\\
+	For $y_p$ we guess that $y_p = Ae^{3x}$, for some $A \epsilon R$\\
+	Plug this into the DE: $y_p' = 3Ae^{3x}$\\
+	So $y_p' + 2y_p = e^{3x} \rightarrow 3Ae^{3x} + 2Ae^{3x} = e^{3x}$\\
+	Our guess works if $A = \frac{1}{5}$\\
+	Therefore $y_p = \frac{1}{5}e^{3x}$ is a solution and the general solution is $y = y_h + y_p = Ce^{-2x} + \frac{1}{5}e^{3x}$\\
+	
+	\myt{Example2:}\\
+	$$\frac{dy}{dx} = y - x^2$$
+	$$\frac{dy}{dx} - y = -x^2$$
+	
+	We have $y_n = Ce^x$\\
+	We guess $y_p = Ax^2 + Bx + C$\\
+	$\rightarrow y_p' = 2Ax + B$\\
+	$\rightarrow$ The DE gives $(2Ax + B) - (Ax^2 + Bx + C) = -x^2$\\
+	ie $-Ax^2 + (2A - B)x + (B-C) = -x^2$\\
+	$-A = -1$ and $2A-B = 0$ and $B-C = 0$\\
+	$A = 1$ and $B = 2$ and $C = 2$\\
+	$y = y_h + y_p = Ce^x + x^2 + 2x + 2$\\\
+	
+\end{document}
