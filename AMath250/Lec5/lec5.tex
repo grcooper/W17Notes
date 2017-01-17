@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Introduction to Mathematical Modelling\vspace{-1ex}}
+\date{January 16th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	In applications we often have info about the \underline{rate of change} of a quantity\\
+	Eg. Consider a population of organisms, P(t), with unlimited resources ( space, food, etc )\\
+	That is, $\frac{dP}{dt} = aP$ for some $a \epsilon R$\\
+	$$\rightarrow P(t) = Ce^{at}$$
+	At $t=0$ we have $P(0) = C$, so C is the initial population.\\
+	$$P(t) = P_0e^{at}$$
+	(this is the Malthusian model of population growth)\\
+	Malthus suggested including a "carrying capacity", K (a maximum sustainable population). How might we modify the equation?\\
+	
+	One way: \underline{The Logistic Model}\\
+	We should alter it in such a way that the dervitive is 0 when we reach K\\
+	$$\frac{dP}{dt} = aP(1-\frac{P}{k})$$
+	
+	
+\end{document}

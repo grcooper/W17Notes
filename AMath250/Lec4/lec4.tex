@@ -36,8 +36,8 @@
 	
 	Now consider two other observations:\\
 	\begin{itemize}
-		\item If k(x) is a constant, then we find $y_n$ by inspection
-		$$\frac{dy}{dx} + ky = 0 \rightarrow y_n = Ce^{-kx}$$
+		\item If k(x) is a constant, then we find $y_h$ by inspection
+		$$\frac{dy}{dx} + ky = 0 \rightarrow y_h = Ce^{-kx}$$
 		\item The general solution to a first order equation needs one constant of integration
 	\end{itemize}
 
@@ -45,9 +45,9 @@
 	
 	\myt{TO SOLVE:} $\frac{dy}{dx} + ky = f(x)$\\
 	\begin{enumerate}
-		\item Find $y_n$ (by inspection): $y = Ce^{-kx}$
+		\item Find $y_h$ (by inspection): $y = Ce^{-kx}$
 		\item Find $y_p$ any particular solution to the inhomogeneous DE
-		\item The general solution to the full DE will be $y = y_n + y_p$
+		\item The general solution to the full DE will be $y = y_h + y_p$
 	\end{enumerate}
 
 	How do we find $y_p$?\\
@@ -67,7 +67,7 @@
 	$$\frac{dy}{dx} = y - x^2$$
 	$$\frac{dy}{dx} - y = -x^2$$
 	
-	We have $y_n = Ce^x$\\
+	We have $y_h = Ce^x$\\
 	We guess $y_p = Ax^2 + Bx + C$\\
 	$\rightarrow y_p' = 2Ax + B$\\
 	$\rightarrow$ The DE gives $(2Ax + B) - (Ax^2 + Bx + C) = -x^2$\\
@@ -75,5 +75,53 @@
 	$-A = -1$ and $2A-B = 0$ and $B-C = 0$\\
 	$A = 1$ and $B = 2$ and $C = 2$\\
 	$y = y_h + y_p = Ce^x + x^2 + 2x + 2$\\\
+	
+	Continuing on Jan 16th\\
+	
+	\myt{summary:}\\
+	\begin{tabular}{c | c}
+		Forcing Term & Trial Function \\
+		\hline 
+		$ae^{kx}$ & $Ae^{kx}$ \\
+		$a_nx^n + a_{n-1}x^{n-1} + ... + a_0$ where $a_n \ne 0$ & $A_nx^n + A_{n-1}x^{n-1} + ... + A_0$\\
+		$a\cos(kx) + b\sin(kx)$ & $A\cos(kx) + B\sin(kx)$ \\ 
+		$x^ne^{kx}$ & $(A_nx^n + A_{n-1}x^{n-1} + ... + A_0)e^{kx}$\\
+		$x^n(a\cos(kx) + b\sin(kx))$ (one of a or b = 0) & $(A_nx^{n}+A_{n-1}x^{n-1}+ ... + A_0)(C\cos(kx) + \sin(kx))$\\
+		$e^{ax}\cos(bx)$ & $e^{ax}(A\cos(bx) + B\sin(bx))$\\
+	\end{tabular}\\
+
+	\myt{One problem exists, Example:}\\
+	$$\frac{dy}{dx} + 2y = e^{-2x}$$
+	
+	If we try $y_p = Ae^{-2x}$ we get $y_p' = -2Ae^{-2x}$, and so $y_p' + 2y' = e^{-2x} \rightarrow -2Ae^{-2x} + 2Ae^{-2x} = e^{-2x} \rightarrow 0 = 1$\\
+	
+	Whoops the above is wrong, oh no! What happened? The homogeneous solution is $y_h = Ce^{-2x}$ so this cannot solve the inhomogeneous problem!\\
+	
+	What else might work?\\
+	Try $y = Axe^{-2x}$\\
+	$\rightarrow y' = Ae^{-2x} - 2Axe^{-2x}$\\
+	The DE becomes $(Ae^{-2x} = 2Axe^{-2x}) + 2Axe^{-2x} = e^{-2x}$\\
+	This works if $A = 1$,\\
+	$\rightarrow y = Ce^{-2x} + xe^{-2x}$\\
+	
+	* IF our usual trial function matches the homogeneous solution, we'll need to multiply the trial function by x\\
+	We prove that the solution works by plugging it into the function\\
+	
+	\myt{Example (more problems with the above)}\\
+	$$\frac{dy}{dx} + 2y = xe^{-2x}$$
+	Normally for $xe^{-2x}$, we'd guess that $y_p = (Ax + B)e^{-2x}$\\
+	This will fail. (Try it????)\\
+	Try instead: $y = (Ax^2 + Bx)e^{-2x}$\\
+	$$y' + 2y = xe^{-2x}$$
+	$$\rightarrow (2Ax + B)e^{-2x} - 2(Ax^2+Bx)e^{-2x} + 2(Ax^2 + Bx)e^{-2x}$$
+	$$= xe^{-2x}$$
+	$$\iff (2Ax + B)e^{-2x} = xe^{-2x}$$
+	$$\iff (2Ax + B) = x$$
+	$$\iff A = \frac{1}{2} \space B = 0$$
+	So $y = Ce^{-2x} + \frac{1}{2}xe^{-2x}$\\
+	
+	Guessing your work is a standard method - and can be faster than finding the Integration constant. This is an endorsed method and should be used.\\
+	
+	
 	
 \end{document}

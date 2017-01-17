@@ -205,6 +205,53 @@
 	Sub into p(x)\\
 	$$p(x) = 3 - (x-1) + 3(x-1)^2 - (x-1)^3$$
 	
+	From Jan 16th:\\
+	See image Interp1.1: He is showing that the polynomial (red line) could be bad, we want the green line instead.\\
+	
+	\subsection*{Cubic Spline}
+	Given: $(x_1,y_1),...,(x_N,y_N)$ N points\\
+	$x_1 < x_2 < ... < x_{N-1} < x_{N}$\\
+	
+	A \underline{cubic spline} is a function S(x) defined on the interval $[x_1, x_N]$ which satisfies the following:\\
+	(see interp1.2 figure)
+	\begin{enumerate}
+		\item In each interval $[x_i,x_{i+1}]$ S(x) is a cubic polynomial. $S_i(x) = a_i + b_i(x-x_i) + c_i(x-x_i)^2 + d_i(x-x_i)^3$
+		\item S(x) interpolates the N points: $S(x_i) = y_i$
+		\item S'(x) is continuous
+		\item S''(x) is continuous
+		\item 2 other things??
+	\end{enumerate}
+	\myt{Is this well defined?}\\
+	How man unknowns? 4 per interval, N-1 intervals $\rightarrow 4N-4$ unknowns\\
+	How many conditions (equations)?\\
+	Condition(2) $\rightarrow$ 2 equations per interval $\rightarrow 2N-2$\\
+	$S_i(x_i) = y_i$ and $S_i(x_{i+1}) = y_{i+1}$\\
+	Condition(3) - 1 equation per interior point $\rightarrow N-2$\\
+	Condition(4) - 1 equation per interiour point $\rightarrow N-2$\\
+	In total we get $4N-6$ equations\\
+	
+	\myt{Boundary Conditions}
+	\begin{enumerate}
+		\item Natural cubic spline $S''(x_1) = 0$, $S''(x_N) = 0$
+		\item Clamped cubic spline $S'(x_1) = s_1$ and $S'(x_N) = s_N$ $s_1, s_N$ are known
+		\item Periodic Cubic spline $S'(x_N) = S'(x_1)$ and $S''(x_N) = S''(x_1)$
+		\item Not-a-knot condition (Matlab default) $S'''(x)$ is continuous at $x_2$ and $x_{N-1}$
+	\end{enumerate}
+
+	\subsubsection*{How do we compute a cubic spline?}
+	\myt{Method 1}:\\
+	Have $4N-4$ uknowns and $4N-4$ linear equations $\rightarrow$ sove via Gaussian elimination\\
+	This is a cost of: $O((4N-4)^3) = O(N^3)$\\
+	
+	\myt{Method 2}:\\
+	Think of the deriviatives $S_1, S_2, ... S_N$ as the unknowns. We will set up linear equations for these derivatives\\
+	Then:\\
+	\begin{enumerate}
+		\item This will give us $S_1(x),S_2(x), ..., S_{N-1}(x)$
+		\item We will solve linear system in O(N) operations
+	\end{enumerate}
+
+
 	
 	
 \end{document}
