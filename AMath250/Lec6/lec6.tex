@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Introduction to Dimensional Analysis\vspace{-1ex}}
+\date{January 20th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	In applications we'll want to keep track of the units of measurement. For cimplicity we'll speak instead of the "dimensions" being measured.\\
+	New notation: The dimensions of mass are mass - square brackets define the dimensions of something\\
+	$[mass] = M$, $[length] = L$, $[time] = T$ etc. We will add more later\\
+	
+	We start with two axioms:\\
+	\begin{enumerate}
+		\item (D1) Physical quantities may only be added ,subtracted, or equated if they have the same dimensions.
+		\item (D2) Quantities of different dimensions can only be combined by multiplication and division, in which case we have $[AB] = [A][B]$ and $[\frac{A}{B}] = \frac{[A]}{[B]}$
+	\end{enumerate}
+
+	We can define dimensions for any quatntites which we believe shoudl obey these rules\\
+	In Physichs applications, we have 5 dimensions:\\
+	M, L, T and $[temperature] = U$ and $[charge] = Q$\\
+	(We can also define our own dimensions $[money]$, or $[applies]$ and $[oranges]$ etc.)\\
+	
+	We can use D2 to calculate dimensions of secondary quantities:\\
+	eg) $[speed] = \frac{[length]}{[time]} = LT^{-1}$\\
+	from: $v = \frac{ds}{dt} = \lim_{\Delta t}\frac{\Delta s}{\Delta t}$\\
+	
+	$[acceleration] = [\frac{dv}{dt}] = \frac{[speed]}{[time]} = LT^{-2}$\\
+	$[force] = [mass][acceleration] = MLT^{-2}$\\
+	$[work] = [force][distance] = ML^2T^{-2}$\\
+	$[voltage] = \frac{[work]}{[charge]} = ML^2T^{-2}Q^{-1}$\\
+	
+	Comment: Angles are.... \underline{dimensionless}! (in radians, $\Theta = \frac{s}{r})$ with radius r and length of the side is s. so $[\Theta] = \frac{[s]}{[r]} = \frac{L}{L} = 1$\\
+\end{document}

@@ -14,6 +14,7 @@
 \begin{document}
 	\maketitle
 	
+	\subsection*{The Logistic Model of Population Growth}
 	In applications we often have info about the \underline{rate of change} of a quantity\\
 	Eg. Consider a population of organisms, P(t), with unlimited resources ( space, food, etc )\\
 	That is, $\frac{dP}{dt} = aP$ for some $a \epsilon R$\\
@@ -27,5 +28,89 @@
 	We should alter it in such a way that the dervitive is 0 when we reach K\\
 	$$\frac{dP}{dt} = aP(1-\frac{P}{k})$$
 	
+	\myt{Now Jan 18th:}\\
+	Summary from last day:\\
+	$$\frac{dP}{dt} = aP(1-\frac{P}{k})$$
+	where a is a proportionality constant, and K is the carrying capacity\\
+	(Note that $\frac{dP}{dt} \approx aP$ when $P << K$ and $\frac{dP}{dt} \approx 0$ when $P \approx k$)\\
+	
+	Solution?\\
+	$$\int \frac{dP}{P(1-\frac{P}{k})} = \int adt$$
+	$$\int \frac{dP}{P(1-\frac{P}{k})} = \int \frac{k}{P(k-P)}dP = ...$$
+	we find:\\
+	$$P(t) = \frac{k}{Ce^{-at} + 1}$$
+	$$P(0) = P_0 \rightarrow P(t) = \frac{kP_0}{(k-P_0)e^{-at} + P_0}$$
+	
+	\subsection*{DE's Arising from Physical Laws}
+	
+	\subsubsection*{Newton's 2nd law of motion}
+	For relatively smal velocities ($v << c \approx 3\times 10^8$m/s) this states that $\frac{d}{dt}(mv) = F$. m = mass, v = speed, f = net force\\
+	
+	If m is constant we have $m\frac{dv}{dt} = F$, ie $F = ma$\\
+	
+	Since $V = \frac{dx}{dt}$ (if x is displacement! we may also write $m\frac{d^2x}{dt^2} = F$\\
+	(See fig5.1)\\
+	
+	\myt{Example: The sky diver problem:}\\
+	This is in the course notes, but we are setting it up slightly different.\\
+	An object of mass m, in free fall is subject to forces of gravity and air resistance (drag).\\
+	I will treat (slightly different than course notes) "up" will be the positive direction so x(t) is height above the ground.\\
+	Let $v(t) = \frac{dx}{dt}$\\
+	Consider the forces:\\
+	Gravity: $F_g = -mg$ ($g \approx 9.8$m/$s^2$)\\
+	Air Resistance: Complicated. We will simply assume $F_{air} = -\alpha v$\\
+	
+	Combining these, $F = F_g + F_{air} = -mg-\alpha v$\\
+	$\rightarrow m\frac{dv}{dt} = -mg-\alpha v$\\
+	
+	ie $\frac{dv}{dt} + \frac{\alpha}{m}v = -g$\\
+	We have $V_c = Ce^{\frac{-\alpha}{m}t}$\\
+	For $V_p$? Try V = A, we guess a constant (A zero'th order polynomial) then $v' = 0$\\
+	so $\frac{\alpha}{m}A = -g$\\
+	So $A = \frac{-mg}{\alpha}$\\
+	
+	Thus, $v(t) = Ce^{\frac{-\alpha}{m}t} - \frac{mg}{\alpha}$\\
+	If the object was dropped from rest, then $v(0) = 0$, and so $0 = C - \frac{mg}{\alpha}$, so $C = \frac{mg}{\alpha}$, and so $v(t) = \frac{mg}{\alpha}(e^{\frac{-\alpha}{m}t} - 1)$\\
+	(see Fig5.2)
+	
+	\subsubsection*{Circuit Analysis}
+	A simple circuit containing a resistor and a capacitor may be illustrated like this: (fig 5.3). Here, V(t) is a source voltage (could be constant for a battery, eg) and i(t) is the current. R is the resistance (in ohms) of a resistor and C is the capacitance (in Farads) of a capacitor.\\
+	
+	We have a set of def'us/experimental laws which govern these circuits:\\
+	\myt{Kirchhoff's Voltage Law:}\\
+	$$v(t) = V_R(t) + V_C(t)$$
+	$V_R$ and $V_C$ are the voltage drops (losses of potential entery) at RPC\\
+	\myt{Ohm's law}:\\
+	$$V_R(t) = iR$$
+	\myt{Definition of C}\\
+	$$V_c(t) = \frac{1}{C}q$$
+	where q(t) is the charge at the capacitor\\
+	$$q(t) = \int_{0}^{t}i(t)dt$$
+	ie $i(t) = \frac{dq}{dt}$\\
+	
+	\myt{From Jan 20th}:\\
+	Combining these:\\
+	$$V = V_R + V_C$$
+	$$= R_i(t)$$
+	$$\rightarrow V = R\frac{dq}{dt} + \frac{q}{c}$$
+	That is:\\
+	$$\frac{dq}{dt} + \frac{q}{RC} = \frac{V}{R}$$
+	(A first order linear DE for the charge on the capicitor!)\\
+	Let's assume V is constant ( the source voltage is a battery).\\
+	The solution to the homogeneous:\\
+	$$q_h = Ke^{\frac{-2}{RC}}$$
+	A particular solution:\\
+	We try $q = A$ Then $q' = 0$, so we have $0 + \frac{A}{RC} = \frac{V}{R}$ so $A = VC$\\
+	
+	$$\rightarrow q(t) = Ke^{\frac{-t}{RC}} + VC$$
+	If $q(0) = 0$ then $0 = k + VC$ so $K = -VC$\\
+	and so $q(t) = VC[1 - e^{\frac{-t}{RC}}]$\\
+	
+	See Fig5.4\\
+	Therefore $i(t) = \frac{dq}{dt} = \frac{V}{R}e^{\frac{-2}{RC}}$\\
+	See Fig5.5\\
+	
+	Also $V_R(t) = Ve^{\frac{-2}{RC}}$ and $V_C(t) = V[1-e^{\frac{-t}{RC}}]$\\
+	See fig5.6\\
 	
 \end{document}
