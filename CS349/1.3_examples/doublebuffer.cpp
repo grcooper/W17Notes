@@ -235,7 +235,6 @@ void initX(int argc, char *argv[], XInfo &xinfo) {
 	 * Put the window on the screen.
 	 */
 	XMapRaised( xinfo.display, xinfo.window );
-	
 	XFlush(xinfo.display);
 }
 

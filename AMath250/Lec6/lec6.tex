@@ -39,4 +39,58 @@
 	$[voltage] = \frac{[work]}{[charge]} = ML^2T^{-2}Q^{-1}$\\
 	
 	Comment: Angles are.... \underline{dimensionless}! (in radians, $\Theta = \frac{s}{r})$ with radius r and length of the side is s. so $[\Theta] = \frac{[s]}{[r]} = \frac{L}{L} = 1$\\
+	
+	\begin{itemize}
+		\item There are some theoretical questions about what ahs dimensions and what doesn't (eg angles! - we'll treat angles as dimensionless, since $\Theta = \frac{s}{r})$
+		\item A consequence of D1 and D2 is that the input and ouput of any transcendental function must be dimensionless
+	\end{itemize}
+
+	Why? Suppose f(x) has a Maclaurin series. Then $f(x) = a_0 + a_1x + a_2x^2 + ... $\\
+	
+	Eg: $e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + ...$\\
+	
+	\subsection*{Application 1: Consistency checks.}
+	
+	\underline{Example:} In the sky-diver problem, we started with $m\frac{dv}{dt} = -\alpha v-mg$\\
+	
+	We know $[m] = M$, $[v] = LT^{-1}$, $[t] = T$, $[g] = LT^{-2}$\\
+	We can determine $[\alpha]$: the force due to air resistance is $[-\alpha v] = [force]$, so $[\alpha] = \frac{[force]}{[v]} = \frac{MLT^{-2}}{LT^{-1}} = MT^{-1}$\\
+	Also $[mg] = MLT^{-2}$\\
+	$[m\frac{dv}{dt}] = \frac{MLT^{-1}}{T} = MLT^{-2}$\\
+	
+	$\frac{dv}{dt} = \lim\limits_{\Delta t \rightarrow 0}\frac{\Delta v}{\Delta t} = \frac{LT^{-1}}{T} = LT^{-2}$\\
+	
+	Now we found the solution to be:\\
+	$v = \frac{mg}{\alpha}(e^{\frac{-\alpha t}{m}} - 1)$\\
+	Check? $[v] = LT^{-1}$\\
+	$[\frac{-\alpha}{m}t] = \frac{[\alpha][t]}{[m]} = \frac{(MT^{-1})T}{M} = 1$\\
+	$[\frac{mg}{\alpha}] = \frac{MLT^{-2}}{MT^{-1}} = LT^{-1}$\\
+	
+	\subsection*{Application 2: Nondimentionalization of DEs}
+	
+	We may be able to introduce dimensionless variables, which may allow us to write our DE's in simpler forms.\\
+	Eg 1: For a pendulum, we might say that the period is a "characteristic time ( for that pendulum), $t_c$. We could then define a dimensionless time variable, $\tau$ as $\tau = \frac{t}{t_c}$ (after 10 oscillations we'll have $\tau = 10$)\\
+	
+	\myt{Procedure for Nondimensionalization}\\
+	\begin{enumerate}
+		\item List the physical constants in the problem, and identify their dimensions.
+		\item Make a seperate list for the variables
+		\item Find combinations of the constants which have the same dimensions as the varaibles (do this for each variable). These will be the \underline{characteristic scales} and we will then define $\tau = \frac{t}{t_c}$, $\mu = \frac{m}{m_c}$, $\lambda = \frac{l}{l_c}$, $\epsilon = \frac{x}{x_c}$ etc
+		\item rewrite the DE and IVP in terms of the new variables (using the chain rule). Note: the char schales will often have simple physical interpretations
+	\end{enumerate}
+	
+	\underline{Example: The Mixing Tank Problem}\\
+	Consider a tank holding a mass m(t) of a chemical dissolved in a volume V of water. A solution with concentration C of the same chemical enters the tank at a rate f\\
+	
+	The contents of the tank are mixed constantly, and the mixed solution exits the tank at $f \frac{L}{min}$. Find m(t)\\
+	
+	We must have 
+	$$\frac{dm}{dt} = (rate in) - (rate out)$$
+	$$= fc - f\frac{m}{V}$$
+	$$\frac{dm}{dt} = fc - \frac{fm}{v} \_|\_ m(0) = m_0$$
+	Consistency check?\\
+	$[\frac{dm}{dt}] = MT^{-1}$\\
+	$[fc] = [L^3T^{-1}] \times [ML^{-3}] = MT^{-1}$\\
+	$[\frac{fm}{v}] = \frac{[L^4T^{-1}][M]}{L^3} = MT^{-1}$\\
+	
 \end{document}
