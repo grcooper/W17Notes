@@ -93,4 +93,85 @@
 	$[fc] = [L^3T^{-1}] \times [ML^{-3}] = MT^{-1}$\\
 	$[\frac{fm}{v}] = \frac{[L^4T^{-1}][M]}{L^3} = MT^{-1}$\\
 	
+	\myt{Starting from Jan 25th}\\
+	\myt{From monday:}\\
+	
+	For the mixing tank problem,\\
+	$$\frac{dm}{dt} = fc - \frac{fm}{v}$$
+	$m(0) = m_0$\\
+	$m = mass$ of chamical in solution in tank,\\
+	$t = time$ in seconds\\
+	$f = flow rate$ ina and out in l/s\\
+	$C = $concenttration of inflowing solution in grams/litre\\
+	$v = $ volume of tank in litres\\
+	(and $m_0 = initial mass$, $m(0)$)\\
+	
+	To nondimensionalize this, list the variables/constants and dimensions\\
+	$[m] = M$, $[t] = T$, $[f] = L^3T^{-1}$, $[c] = ML^{-3}$, $[v] = L^3$\\
+	
+	Find combinations of constants with dimensions of variabels, call these $m_c$, $t_c$\\
+	$m_c = cv$ and $t_c = \frac{v}{f}$\\
+	
+	We now use these values of m and t as ratios/scales for our values\\
+	
+	Define new variabels:\\
+	$$M = \frac{m}{m_c} = \frac{m}{cv}$$
+	$m = CV\mu$\\
+	$$\tau = \frac{t}{t_c} = \frac{t}{\frac{v}{f}} = \frac{ft}{v}$$
+	$t = \frac{V\tau}{f}$\\
+	
+	Rewrite the DE in terms of $\mu, \tau$\\
+	$\frac{dm}{dt} = \frac{dm}{d\mu}\frac{d\mu}{d\tau}\frac{d\tau}{dt} = (cv)\frac{du}{d\tau}(\frac{f}{v}) = fc\frac{du}{d\tau}$\\
+	
+	The original DE is therefore:\\
+	$$fc\frac{du}{d\tau} = fc - \frac{f}{v}(cv\mu)$$
+	That is:\\
+	$$\frac{du}{d\tau} = 1 - \mu$$
+	
+	Initial conditiona? $m(0) = m_0 \rightarrow cv\mu(0) = m_0 \rightarrow \mu(0) = \frac{m_0}{cv}$\\
+	
+	The solution is $\mu(\tau) = Ke^{-\tau} + 1$\\
+	
+	so:\\
+	$$k = \frac{m_0}{cv} - 1$$
+	So:
+	$$\mu{\tau} = (\frac{m_0}{cv} - 1)e^{-\tau}  + 1$$
+	
+	In terms of mt?\\
+	$$\frac{m}{cv} = (\frac{m_0}{cv} - 1)e^{-\frac{ft}{v}} + 1$$
+	so:\\
+	$$m(t) = (m_0 - cv)e^{-\frac{ft}{v}} + cv$$
+	
+	\myt{Example: The RC circuit}\\
+	The IVP for the charge q(t) on a capacitor in an RC circuit is $\frac{dq}{dt} + \frac{q}{RC} = \frac{V(t)}{R}$, $q(0) = q_0$ usually $q(0) = 0$\\
+	Nondimensionalize? Assume $v(t) = v_0$\\
+	$[q] = Q$, $[t] = T$, $[R] = ML^2T^{-1}Q^{-2}$, $[C] = M^{-1}L^{-2}T^2Q^2$, $[V_0] = ML^{2}T^{-2}Q^{-1}$\\
+	$V_R = iR$, and $V_c = \frac{q}{C}$\\
+	
+	$q_c$?? or $t_c$ ??
+	
+	Observe from the DE that $[RC] = T$, so use $t_c = RC$\\
+	Also, $[\frac{v_0}{R}] = \frac{Q}{T}$, so $[\frac{V_0}{R} \times t_c] = Q$ Use $q_c = \frac{V_0}{R}RC = V_0C$\\
+	Define $\tilde{q} = \frac{q}{q_c} = \frac{q}{v_0C}$\\
+	$\tau = \frac{t}{t_c} = \frac{t}{RC}$\\
+	
+	$$\frac{dq}{dt} = \frac{dq}{d\tilde{q}}\frac{d\tilde{q}}{d\tau}\frac{d\tau}{dt} = (v_0C)\frac{d\tilde{q}}{d\tau}(\frac{1}{RC}) = \frac{V_0}{R}\frac{d\tilde{q}}{d\tau}$$
+	
+	$\rightarrow$ our DE becomes $\frac{v_0}{R}\frac{d\tilde{q}}{d\tau} + \frac{V_0C\tilde{q}}{RC} = \frac{V_0}{R}$\\
+	ie $\frac{d\tilde{q}}{d\tau} + \tilde{q} = 1$ This is the same as the mixing tank DE!!\\
+	
+	Interpretation of $q_c$? It's the charge on the capacitor when it is fully charged (so that the voltage matches the srouce voltage)\\
+	And $t_c$? Its the time required for $q(t)$ to reach $(1-e^{-1})V_0C$, ie $\approx 63\%$ of the maximum\\
+	
+	Comment::: There may be more than one option for nondimensionaliation\\
+	
+	Example:\\ Suppose $V(t) = V_0\cos{\omega t}$\\
+	$$\frac{dq}{dt} + \frac{q}{RC} = \frac{V_0\cos{\omega t}}{R}$$
+	
+	using $q_C = V_0C$ and $t_c = RC$, we got $\tilde{q} = \frac{q}{V_0C}$ and $\tau = \frac{t}{RC}$\\
+	$\frac{d\tilde{q}}{d\tau} + \tilde{q} = \cos{RC\omega \tau}$\\
+	Alternatively, we coudl use $t_c = \frac{1}{\omega}$, and $\tau = \omega t$\\
+	
+	This leads to $\frac{d\tilde{q}}{t\tau} + \frac{V_0}{R^2\omega C}\tilde{q} = \cos{\tau}$\\
+	
 \end{document}

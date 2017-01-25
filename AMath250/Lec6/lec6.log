@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.3)  23 JAN 2017 15:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.3)  25 JAN 2017 15:21
 entering extended mode
 **./lec6.tex
 (lec6.tex
@@ -335,11 +335,146 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--95
 
  []
 
-[3] (lec6.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--98
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--108
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 109--111
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--114
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--120
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--122
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--125
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--129
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 133--134
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--143
+
+ []
+
+
+Overfull \hbox (6.31523pt too wide) in paragraph at lines 145--150
+\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 q\OT1/cmr/m/n/12 ] = \OML/cmm/m/it/12 Q$\OT1/
+cmr/m/n/12 , $[\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ] = \OML/cmm/m/it/12 T$\OT1/cm
+r/m/n/12 , $[\OML/cmm/m/it/12 R\OT1/cmr/m/n/12 ] = \OML/cmm/m/it/12 ML[]T[]Q[]$
+\OT1/cmr/m/n/12 , $[\OML/cmm/m/it/12 C\OT1/cmr/m/n/12 ] = \OML/cmm/m/it/12 M[]L
+[]T[]Q[]$\OT1/cmr/m/n/12 , $[\OML/cmm/m/it/12 V[]\OT1/cmr/m/n/12 ] = \OML/cmm/m
+/it/12 ML[]T[]Q[]$ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 145--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 153--157
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 160--162
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--165
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 168--169
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 171--174
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--176
+
+ []
+
+[6] (lec6.aux) ) 
 Here is how much of TeX's memory you used:
  2943 strings out of 493333
  40757 string characters out of 3139169
- 105289 words of memory out of 3000000
+ 107289 words of memory out of 3000000
  6437 multiletter control sequences out of 15000+200000
  11797 words of font info for 46 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -354,9 +489,9 @@ ype1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
 6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on lec6.pdf (3 pages, 132710 bytes).
+Output written on lec6.pdf (6 pages, 147970 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
+ 65 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

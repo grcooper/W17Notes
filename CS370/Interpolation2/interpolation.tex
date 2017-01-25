@@ -354,6 +354,100 @@
 	
 	See slides.
 	
+	\myt{From Jan 25th}\\
+	
+	Slide: Forward Euler Example \#1:\\
+	
+	a):\\
+	
+	$$y_{n+1} = y_n + hf(t_r,y_n)$$
+	$$y_{n+1} = y_{n} + (1) \times 2y_n$$
+	$$y_{n+1} = 3y_n$$
+	
+	First equation\\
+	\begin{tabular}{c | c c c }
+		n & $t_n$ & $y_n$ & $y(t_n)$\\ \hline
+		0 & 1 & 3 & 3\\
+		1 & 2 & 9 & 22\\
+		2 & 3 & 27 & 164\\
+		3 & 4 & 81 & 1210\\
+		4 & 5 & 243 & 8943\\
+	\end{tabular}
+
+
+	Second equation\\
+	\begin{tabular}{c | c c c }
+		n & $t_n$ & $y_n$ & $y(t_n)$\\ \hline
+		0 & 1 & 3 & 3\\
+		1 & 1.5 & 6 & 8\\
+		2 & 2 & 12 & 22\\
+		3 & 2.5 & 81 & 60\\
+		4 & 3 & 243 & 163\\
+		5 & 3.5 & 96 & 445\\
+		6 & 4 & 192 & 1210 \\
+	\end{tabular}
+
+	Third Equation\\
+	\begin{tabular}{c | c c c }
+		n & $t_n$ & $y_n$ & $y(t_n)$\\ \hline
+		0 & 1 & 3 & 3\\
+		1 & 2 & 9 & 22\\
+		2 & 3 & 27 & 164\\
+		3 & 4 & 81 & 1210\\
+		4 & 5 & 243 & 8943\\
+	\end{tabular}
+
+	\myt{Example 2}\\
+	a)\\
+	$y_{n+1} = y_n + hf(t_n,y_n)$\\
+	$
+	\begin{bmatrix}
+		X_{n+1} \\
+		y_{n+1}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	 X_n \\
+	 y_n \\
+	\end{bmatrix}
+	+ 2 \times
+	\begin{bmatrix}
+		-y_n \\
+		x_n \\
+	\end{bmatrix}
+	$\\
+	
+	\begin{tabular}{c | c c c }
+		n & $t_n$ & $x_n$ & $y_n$\\ \hline
+		0 & 0 & 2 & 0\\
+		1 & 2 & 2 & 4\\
+		2 & 4 & -6 & 8\\
+		3 & 6 & -22 & -4\\
+	\end{tabular}
+
+	$x_1 = x_0 - 2y_0 = 2-2(0) = 2$\\
+	$y_1 = y_0 + 2x_0 = 0 + 2(2) = 4$\\
+	$x_2 = x_1 - 2y_1 = 2 - 2(4) = -6$\\
+	$y_2 = y_1 + 2x_1 = 4 + 2(2) = 8$\\
+	
+	\subsection*{Deriving Forward Euler}
+	
+	\myt{Method 1}\\
+	Approximate y' with "finite differences":\\
+	0DE: $y'(t) = f(t,y(t))$\\
+	Approximate: $y'(t_n) \approx \frac{y_{n+1} - y_n}{h} = f(t_n,y_n)$\\
+	$\rightarrow y_{n+1} = y_n + hf(t_n, y_n)$\\
+	
+	\myt{Method 2}\\
+	Use a Taylor series to estimate $y(t_{n+1})$ and drop high order terms.\\
+	$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + hy'(t_n) + \frac{h^2}{2}y''(t_n) + O(h^3)$$
+	Remove terms due to estimations
+	$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + hy'(t_n)$$
+	$$y_{n+1} = y_n + hf(t_n, y_n)$$
+	
+	
+
+	
 	
 	
 
