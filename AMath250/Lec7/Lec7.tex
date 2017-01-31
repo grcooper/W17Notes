@@ -1,0 +1,232 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Lecture 7\vspace{-1ex}}
+\date{January 27th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	\section*{Buckingham's Pi Theorem}
+	
+	Informal explanation: We know equations need to be dimensionally consistent. Buckingham's Pi Theorem is designed to make predictions about solutions based on this. Roughly....Any relationshop between N physical quantities involving r effective dimensions can be completely described in terms of N-r dimensionless quantities.\\
+	
+	\myt{Example 1: The sky-diver problem}\\
+	Coinsider the problem of finding the terminal velocity of an object in free fall. If we know that this quantitiy, V, should depend only on:\\
+	\begin{itemize}
+		\item m (mass of object)
+		\item g (gravitational acceleration)
+		\item $\alpha$ (drag coefficient, assuming $F_{air} = \alpha v$)
+	\end{itemize}
+	
+	There are N = 4 quantities (V, m, g, $\alpha$). How many dimensions are there?\\
+	\begin{itemize}
+		\item $[V] = LT^{-1}$
+		\item $[m] = M$
+		\item $[g] = LT^{-2}$
+		\item $[\alpha] = \frac{[force]}{[velocity]} = \frac{MLT^{-2}}{LT^{-1}} = MT^{-1}$
+	\end{itemize}
+
+	We have M, L, And T so r = 3\\
+	We should therfore be able to construct N-r = 1 dimensionless variable. We'll call it $\Pi$\\
+	$\Pi$ is used because it must be constructed as:\\
+	
+	$$m^{P_m}g^{P_g}\alpha^{P_{\alpha}}V^{P_V}$$
+	It's a product of powers of our quantities. What could $\Pi$ be? By inspection:\\
+	$$\Pi = \frac{mg}{\alpha V}$$
+	We could also use $\frac{\alpha V}{mg}$ or $\frac{\alpha^2 V^2}{m^2g^2}$ but those are just pwoers of the original.\\
+	
+	By Buckingham's $\Pi$ theorem, the solution can be expressed using just $\Pi$. It must therefore be of the form $\Pi$ = c where c is a dimensionless constant\\
+	
+	$$\frac{mg}{\alpha V} = C$$
+	$$V = C_1\frac{mg}{\alpha}$$
+	
+	\myt{Example 2: Radioactive Decay}\\
+	
+	The mass m, of a radioactive substance remaining after a time t, deends on the initial mass $m_0$ and a decay rate k (where $[k] = T^{-1}$). The dimensions:\\
+	\begin{itemize}
+		\item $[m] = M$
+		\item [t] = T
+		\item $[m_0] = M$
+		\item $[k]] = T^{-1}$
+	\end{itemize}
+	We can construct $N-r = 4-2 = 2$ independent dimensionless quantitites $\Pi_1 = \frac{m}{m_0}$, $\Pi_2 = kt$\\
+	The solution can be completely described with these 2:\\
+	$$\Pi_1 = f(\Pi_2)$$
+	$$\frac{m}{m_0} = f(kt)$$
+	$$m = m_0f(kt)$$
+	$$m(t) = m_0e^{-kt}$$
+	
+	\myt{Example 3: Size of a crater (from the problem set)}
+	We are told that the important quantities are\\
+	\begin{itemize}
+		\item E = energy of explosion
+		\item $\rho$ = density of soil
+		\item g = gravitational acceleration
+		\item l = length scale of the crater ( diameter or radius)
+	\end{itemize}
+
+	To produce a crater twice as large, how much more energy is needed?\\
+	\begin{itemize}
+		\item $[E] = ML^2T^{-2}$
+		\item $[\rho] = ML^{-3}$
+		\item $[g] = LT^{-2}$\
+		\item $[l] = L$\
+	\end{itemize}
+
+	$$\Pi = \frac{E}{\rho g l^4}$$
+	The solution has the form $\Pi = C$ ie $E = C\rho gl^4$\\
+	Replacing l with 2l shows that we need 16 times more energy\\
+	
+	\subsection*{Buckingham's $\Pi$ Theorem more rigorously}
+	
+	As motivation for making this more rigorous, consider this:\\
+	\myt{Example:}\\
+	Consider the RC circuit again. We have:\\
+	(Considering the charge q(t))\\
+	\begin{itemize}
+		\item $[q] = Q$
+		\item $[t] = T$
+		\item $[v] = ML^2T^{-2}Q^{-1}$
+		\item $[R] = MC^2TQ^{-2}$
+		\item $[C] = M^{-1}L^{-2}T^2Q^2$
+	\end{itemize}
+	Fig7.1\\
+	
+	5 Quantities, 4 dimensions would seem to imply 5 - 4 = 1 dimensionless quantity. However we have two! ($\frac{t}{RC}$ and $\frac{q}{VC}$)\\
+	What's wrong? There are really only three dimensions here: $Q$, $T$, and $ML^2$. (Better use Q,T,V for voltage). \\
+	To formalize the logic, note that any dimensionless quantitiy in this problem must be constructed as:\\
+	
+	$$\Pi = q^{P_q}t^{P_t}V^{P_V}R^{P_R}C^{P_C}$$
+	
+	We must have $[\Pi] = 1$ so \\
+	$$1 =[q]^{P_q}[t]^{P_t}[V]^{P_V}[R]^{P_R}[C]^{P_C}$$
+	$$1 = Q^{P_q}T^{P_t}[ML^2T^{-2}Q^{-1}]^{P_V}[ML^2T^{-1}Q^{-2}]^{P_R}[M^{-1}L^{-2}T^2Q^2]^{P_C}$$
+	$$1 = M^{P_V + P_R - P_C}L^{2P_V + 2P_R - 2P_C}T^{P_t - 2P_V - P_R + 2P_C}Q^{P_q - P_v - 2P_R + 2P_C}$$
+	Therefore:\\
+	\begin{itemize}
+		\item $P_V + P_R - P_C = 0$
+		\item $2P_V + 2P_R - 2P_C = 0$
+		\item $P_t - 2P_V - P_R + 2P_C$
+		\item $P_q - P_V - 2P_R + 2P_C$
+	\end{itemize}
+
+	ie:\\
+	$
+	\begin{bmatrix}
+		0 & 0 & 1 & 1 & -1 \\
+		0 & 0 & 2 & 2 & -2 \\
+		0 & 1 & -2 & -1 & 2 \\
+		1 & 0 & -1 & -2 & 2 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		P_q \\
+		P_t \\
+		P_V \\
+		P_R \\
+		P_C \\
+	\end{bmatrix}
+	= 
+	\begin{bmatrix}
+	0 \\
+	0 \\
+	0 \\
+	0 \\
+	\end{bmatrix}	
+	$\\
+	We call this the dimensional matrix, D\\
+	
+	\subsection*{Buckingham's $\Pi$ theorem}
+	A Relationship between N physical quantities whose dimensional matrix has rank r, can be completely described in terms of N - r independent dimensionless quantities\\
+	
+	We can construct D by inspection:\\
+	\myt{Eg1:}\\
+	Suppose:\\
+	\begin{itemize}
+		\item $[v] = M^{V_M}L^{V_L}$
+		\item $[w] = M^{W_M}L^{W_L}$
+		\item $[x] = M^{x_M}L^{x_L}$
+	\end{itemize}
+	Then:
+	$D = 
+	\begin{bmatrix}
+		V_M & W_M & x_M \\
+		V_L & W_L & x_L \\
+	\end{bmatrix}
+	$
+	
+	We can also use D to construct the variables $\Pi_i$. Reduce D to echelon form:\\
+	$
+	D =
+	\begin{bmatrix}
+		1 & 0 & 0 & -1 & 1 \\
+		0 & 1 & 0 &  1 & 0 \\
+		0 & 0 & 1 & 1 & -1 \\
+		0 & 0 & 0 & 0 & 0 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		P_q \\
+		P_t \\
+		P_V \\
+		P_R \\
+		P_C \\
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		0 \\
+		0 \\
+		0 \\
+		0 \\
+	\end{bmatrix}
+	$\\
+	$$\rightarrow P_q - P_R + P_C = 0$$
+	$$P_t + P_R = 0$$
+	$$P_V + P_R - P_C = 0$$
+	
+	\myt{Eg2}\\
+	Set $P_R = 0$, $P_C = 1$ ? Then $P_q = -1$, $P_t = 0$, $P_V = 1$\\
+	These give $\Pi = \frac{VC}{q}$\\
+	Set $P_R = 1$, $P_C = 0$? Then $P_q = 1$, $P_t = -1$, $P_V = -1$\\
+	These give $\Pi = \frac{Rq}{Vt}$\\
+	Set $P_R = 1$, $P_C =1$? Then $P_q = 0$, $P_t = -1$, $P_C = 0$\\
+	$$\rightarrow \Pi = \frac{RC}{t}$$
+	
+	\myt{Atomic Bomb Example}\\
+	(Sir Geoffrey Taylor 1947)\\
+	Assumption that 5 quantities are needed:\\
+	\begin{itemize}
+		\item t: time since detonation $[t] = T$
+		\item $\rho$ density of air $[\rho] = ML^{-3}$
+		\item E : Energy released $[E] = ML^2T^{-2}$
+		\item P : atmospheric pressure $[P] = ML^{-1}T^{-2}$
+		\item R : radius of shockwave $[R] = L$
+	\end{itemize}
+
+	$
+	D = 
+	\begin{bmatrix}
+		& P_t & P_{\rho} & P_E & P_p & P_R \\
+		(M) & 0 & 1 & 1 & 1 & 0 \\
+		(L) & 0 & -3 & 2 & -1 & 1 \\
+		(T) & 1 & 0 & -2 & -2 & 0 \\
+	\end{bmatrix}
+	$
+	This reduces to:\\
+	$
+	\begin{bmatrix}
+		1 & 0 & 0 & \frac{-6}{5} & \frac{2}{5} \\
+		0 & 1 & 0 & \frac{3}{5} & \frac{-1}{5} \\
+		0 & 0 & 1 & \frac{2}{5} & \frac{1}{5} \\
+	\end{bmatrix}
+	$
+	$N - r = 5 - 3 = 2$\\
+	$$P_t = \frac{6}{5}P_p - \frac{2}{5}P_R$$
+	$$P_{\rho} = \frac{-3}{5}P_p + \frac{1}{5}P_R$$
+	$$P_{E} = \frac{-2}{5}P_P - \frac{1}{5}P_R$$
+\end{document}

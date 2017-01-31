@@ -445,14 +445,111 @@
 	$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + hy'(t_n)$$
 	$$y_{n+1} = y_n + hf(t_n, y_n)$$
 	
+	\myt{Jan 27th}\\
 	
+	\subsection*{Forward Euler Error}
+	Slide Understanding Forward Euler:\\
+	
+	FE is $y_{n+1} = y_n + hf(t_n, y_n)$\\
+	Taylor series is: $y(t_{n+1}) = y(t_n) + hy'(t_n) + \frac{h^2}{2}y''(t_n) + O(h^3)$\\
+	The error is the difference, assuming exact data, at $t_n$ ie $y_n = y(t_n)$\\
+	
+	So FE becomes:
+	$$y_{n+1} = y(t_n) + hf(t_n,y(t_n)) = y(t_n) + hy'(t_n)$$
+	The difference is:\\
+	$$y_{n+1} - y(t_n) = \frac{-h^2}{2}y''(t_n) + O(h^3)$$
+	$$= O(h^2)$$
+	The local truncation error of FE is $O(h^2)$. Error decreases quadratically with h (the time step)\\
+	
+	\subsection*{Deriving Trapezoidal Rule}
+	Keeping more terms slide\\
+	
+	Taylor series is: $y(t_{n+1}) = y(t_n) + hy'(t_n) + \frac{h^2}{2}y''(t_n) + O(h^3)$\\
+	Replace the y'' term with finit differences approximation:\\
+	$y(t_{n+1}) = y(t_n) + hy'(t_n) + \frac{h^2}{2}[\frac{y'(t_{n+1} - y'(t_n))}{g} + O(h)](t_n) + O(h^3)$\\
+	The muliploicatino by $h^2$ gets rid of the O(h)\\
+	
+	Simplify:\\
+	$$y(t_{n+1}) = y(t_n) + hy'(t_n) + \frac{h}{2}y'(t_{n+1}) - \frac{h}{2}y'(t_n) + O(h^3)$$
+	$$= y(t_n) + \frac{h}{2}[f(t_n, y(t_n)) + f(t_{n+1}, y(t_{n+1}))] + O(h^3)$$
+	$\therefore$ Trapezoidal is $O(h^3)$:\\
+	$$y_{n+1} = y_n + \frac{h}{2}[f(t_n, y_n) + f(t_{n+1}, y_{n+1})]$$
+	
+	\subsection*{Deriving Modified Euler}
+	Error of improved euler slide:\\
+	Trapezoidal: $y_{n+1} = y_n + \frac{h}{2}[f(t_n, y_n) + f(t_{n+1}, y_{n+1})]$\\
+	ForwardEuler: $y(t_{n+1}) = y(t_n) + hy'(t_n) + O(h^2)$\\
+	Let $y*_{n+1} = y(t_n) + hf(t_n,y(t_n))$ so 1st step has error:\\
+	$y(t_{n+1}) - y*_n+1 = O(h^2)$\\
+	
+	Taylor expanding f, we get:\\
+	$$f(t_{n+1}, y(t_{n+1})) = f(t_{n+1}, y*_{n+1}) + \frac{2f}{2y}(t_{n+1},y*_{n+1})(y(t_{n+1}) - y*_{n+1}) + O((y(t_{n+1}) - y*_{n+1})^2)$$
+	$$\therefore f(t_{n+1}, y(t_{n+1})) = f(t_{n+1}, y*_{n+1}) + O(h^2)$$
+	Plugging into trapezoidal:\\
+	$$y(t_{n+1}) = y(t_n) + \frac{h}{2}[f(t_n, y(t_n)) + f(t_{n+1}, y*_{n+1}) + O(h^2)] + O(h^3)$$
+	$$= y(t_n) + \frac{h}{2}[f(t_n,y(t_n) + f(t_{n+1},y*_{n+1})] + O(h^3)$$
+	
+	\subsection*{Improved Euler Example}
+	Apply Improved Euler with h = 2 for 2 steps:\\
+	General Form: $y*_{n+1} = y_n + hf(t_n, y_n)$\\
+	$y_{n+1} y_n \frac{h}{2}[f(t_n, y_n) + f(t_{n+1},y*_{n+1})]$\\
+	$IVR = X'(t) = -y(t)$ and $y'(t) = x(t)$\\
+	$\therefore$ we have\\
+	$$X^t_{n+1} = x_n + 2(-y_n)$$
+	$$y^t_{n+1} = y_n + 2(x_n)$$
+	$$x_{n+1} = x_n + \frac{2}{2}[-y_n + -y*_{n+1}]$$
+	$$y_{n+1} = y_n + \frac{2}{2}[X_n + X*_{n+1}]$$
+	
+	Step through\\
+	Step1 (n = 0)\\
+	$$x_1* = X_0 - 2y_0 = 2-2(0) = 2$$
+	$$y_1* = y_0 + 2X_0 = 0 + 2(2) = 4$$
+	$$x_1 = x_0 - y_0 - y_1* = 2-0-4 = -2$$
+	$$y_1 = y_0 + x_0 + x_1* = 0 + 2 + 2 = 4$$
 
-	
-	
-	
+	\begin{tabular}{ c | c c c | c c}
+		n & $t_n$ & $X_n$ & $y_n$ & $X*_n$ & $Y*_n$ \\ \hline
+		0 & 0 & 2 & 0 & X & X \\
+		1 & 2 & -2 & 4 & 2 & 4 \\
+		2 & 4 & -6 & -8 & -10 & 0\\
+	\end{tabular}
 
+	\subsection*{Trapezoidal Example}
+	Generic for: $y_{n+1} = y_n + \frac{h}{2}[f(t_n,y_n) + f(t_{n+1}, y_{n+1})]$\\
+	For this problem with h = 2\\
+	$$X_{n+1} = X_n + \frac{2}{2}[-y_n - y_{n+1}]$$
+	$$y_{n+1} = y_n + \frac{2}{2}[x_n + x_{n+1}]$$
 	
+	$$X_{n+1} + y_{n+1} = X_n + y_n$$
+	$$-X_{n+1} + y_{n+1} = X_n + y_n$$
+	OR\\
+	$
+	\begin{bmatrix}
+	1 & 1 \\
+	-1 & 1 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+	x_{n+1} \\
+	y_{n+1} \\
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	x_n - y_n \\
+	x_n + y_n \\
+	\end{bmatrix}
+	$
 	
+	Slide form Deriving BDF1/BDF2\\
+	
+	Fit lagrange polnomial to $(t_n, y_n)$ and $(t_{n+1}, y_{n+1})$\\
+	$$p(t) = y_n(\frac{t - t_{n+1}}{t_n - t_{n+1}}) + y_{n+1}(\frac{t-t_n}{t_{n+1}-t_n})$$
+	$$p(t) = y_n(\frac{t-t_{n+1}}{-h}) + y_{n+1}(\frac{t-t_n}{h})$$
+	$$p'(t) = \frac{y_{n+1} - y_n}{h}$$
+	This gives the slope which rerequire to match f at the end of step time\\
+	$$p'(t_{n+1}) = \frac{y_{n+1}-y_n}{h} = f(t_{n+1}, y_{n+1})$$
+	
+	Be is:\\
+	$$y_{n+1} y_n + hf(t_{n-1}, y_{n-1})$$
 	
 	
 	
