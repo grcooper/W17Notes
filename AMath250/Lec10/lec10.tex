@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Lecture 10\vspace{-1ex}}
+\date{February 8th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	\section*{Oscillatory Systems}
+	(Applications of 2nd-order linear DE's)
+	If \underline{MechanicalOscillators}
+	\begin{itemize}
+		\item simple pendulum (for small oscillations at least)
+		\item a bouy or boat (floating object in water)
+		\item cantilevers (something fixed at one end ie a building oscillating in the wind)
+	\end{itemize}
+	
+	\subsection*{Spring(mechanical) Oscillator}
+	As a "thought experiment", consider a mass attached to a spring, sliding on a frictionless surface. We will assume that the spring obey's Hooke's Law:\\
+	Force from spring = $F_{spring} = -kx$\\s
+	
+	We will also consider the effect of a damping force\\
+	$f_{damping} = -c\frac{dx}{dt}$ for $c > 0$\\
+	If we consider no other forces, then Newton's 2nd law of motion gives:\\
+	$F = ma$
+	$\rightarrow -kx - c\frac{dx}{dt} = m\frac{d^2x}{dt}$\\
+	
+	That is, $x''(t) + \frac{c}{m}x'(t) + \frac{k}{m}x = 0$\\
+	
+	We can also consider the effect of an "external" force F(t)\\
+	$$m\frac{d^2x}{dt^2} = -kx-c\frac{dx}{dt} + F(t)$$
+	$$\rightarrow x'' + \frac{c}{m}x' + \frac{k}{m}x = \frac{F(t)}{m}$$
+	Traditionally this is rewritten in terms of:\\\\
+	$\omega_0 = \sqrt{frac{k}{m}}$ The natural frequency\\
+	and:\\
+	$\zeta = \frac{c}{2\omega_0m} = \frac{c}{2\sqrt{km}}$ (the damping parameter)\\
+	Note: $\zeta$ is dimensionless!\\
+	
+	$f(t) = \frac{F(t)}{m}$\\
+	With these, we have
+	$$x''(t) + 2\omega_0\zeta x'(t) + \omega_0^2x(t) = f(t)$$
+	
+	\subsection*{The Electrical Oscillator}
+	Consider a circuit consisting of a source voltage, a resistor, a capacitor and an inductor in series\\
+	(see fig10.1)
+	A variation of Faraday's law states that the voltage drop across the inductor is proportional to the derivative of the current.\\
+	$V_L(t) = L\frac{di}{dt}$ (L is called the inductance)\\
+	Combining this with our other laws we have:\\
+	$V(t) = V_R(t) + V_C(t) + V_L(t)$\\
+	$= Ri + \frac{1}{c}q + L\frac{di}{dt}$\\
+	
+	So for the current we have:\\
+	$V'(t) = R\frac{di}{dt} + \frac{i}{c} + L\frac{d^2i}{dt^2}$\\
+	While for the charge we have:\\
+	$V(t) = R\frac{dq}{dt} + \frac{1}{c}q + L\frac{d^2q}{dt}$\\
+	
+	Now if we let $\omega_0 = \frac{1}{\sqrt{LC}}$, $\zeta = \frac{R}{2\omega_0L}$, $f(t) = \frac{V(t)}{L}$\\
+	We get:\\
+	$$q''(t) + 2\omega_0\zeta q'(t) + \omega_0^2 q(t) = f(t)$$
+	This is the same DE as fo the mechanical oscillator! We can draw an analogy\\
+	
+	Compare:\\
+	$$mx'' + cx' + kx = F(t)$$
+	$$Lq'' + Rq' + \frac{1}{c}q = V(t)$$
+	
+	We can see that displacement corresponds to charge ( quantity of interest)\\
+	We can see that applied force corresponds to applied voltage (sources of energy)\\
+	we can see that spring corresponds to capacitor (storage of energy)\\
+	We can see that damper corresponds to resistor (appose the motion within the system/lose energy))\\
+	we can see that mass corresponds to inductance ( momentum )\\
+	
+	\subsection*{Free Oscillations}
+	With no external force/voltage we have:\\
+	$$y'' + 2\omega_0\zeta y' + \omega_0^2 y = 0$$
+	The characteristic equation is:\\
+	$$m^2 + 2\omega_0\zeta m + \omega^2 = 0$$
+	The roots are:\\
+	$$m = \frac{-2\omega_0 \zeta \pm \sqrt{4\omega_0^2\zeta^2 - 4\omega_0^2}}{2}$$
+	$$m = -\omega_0\zeta \pm \omega_0\sqrt{\zeta^2 - 1}$$
+	Now we can see the reason for using $\zeta$. The critical point between real and complex roots is $\zeta = 1$ ie. $C = 2\sqrt{km}$ or $R = L^{\frac{3}{2}}\sqrt{c}$
+	
+	\subsubsection*{Case 1a $\zeta = 0$ (No damping at all)}
+	
+	Here we have:\\
+	$$y'' + \omega^2 y = 0$$
+	so $y = C_1cos(\omega_0 t) + C_2sin(\omega_0 t)$\\
+	now we see the reason for calling $\omega_0$ the natural frequency:\\
+	If $y(0) = 0$ and $y'(0) = 0$ then $0 = c_1$ and $C_2\omega_0 = 0$ so $C_1 = C_2 = 0$ and $y = 0$\\
+	
+	If $y(0) = y_0$ and $y'(0) = 0$ (initial displacement), we get:\\
+	$y_0 = C_1$ and $0 = C_2$, so $y = y_0cos(\omega_0 t)$\\
+	We call this behaviour simple harmonic motion (SHM)\\
+	If $y(0) = 0$ and $y'(0) = v_0$ (initial velocity), we get:\\
+	$0 = C_1$ and $V_0 = C_2\omega_0$ so $C_2 = \frac{V_0}{\omega_0}$, and so $y = \frac{V_0}{\omega_0}sin(\omega_0 t)$\\
+	
+	If $y_0 = y_0$ and $y'(0) = v_0$ then $y_0 = C_1$ and $v_0 = C_2\omega_0$\\
+	$$y = y_0cos(\omega_0 t) + \frac{V_0}{\omega_0}sin(\omega_0 t)$$
+	This is still SHM; it can be expressed asa single cosine or sine function\\
+	
+	How? Work backwards:\\
+	$$cos(A + B) = cos(A)cos(B) - sin(A)sin(B)$$
+	$$\rightarrow Rcos(\omega t - \phi) = R[cos(\omega_0 t)cos(\phi) + sin(\omega_0 t)sin(\phi)]$$
+	$$= (Rcos(\phi))cos(\omega_0 t) + (Rsin(\phi)sin(\omega_0 t)$$
+	Now ewe set: $Rcos(\phi) = C_1$ and $Rsin(\phi) = C_2$\\
+	Then: $R = \sqrt{C_1^2 + c_2^2}$ and $tan(\phi) = \frac{C_2}{C_1}$\\
+	
+	So our general solution $y = C_1cos(\omega_0 t) + C_2sin(\omega_0 t)$ can also be expressed as $y = Rcos(\omega_0 t - \phi)$\\
+	
+	Expressed as $y = Rcos(\omega_0 t - \phi)$\\
+	With this, $y= \sqrt{y_0^2 + \frac{v_0^2}{\omega_0^2}}cos(\omega_0 t - \phi)$ where $tan(\phi) = \frac{v_0}{y_0\omega_0}$
+	
+	\subsubsection*{Case 1b $zeta \epsilon (0,1)$}
+	In this case we have $m = -\omega_0 \zeta \pm \omega \sqrt{1 - \zeta^2}i$\\
+	(We are using: $\pm\sqrt{-a} = \pm ai$)
+	so $y = e^{-\omega_0\zeta t}[C_1 cos(\omega_0 \sqrt{1-\zeta^2}t) + C_2sin(\omega\sqrt{-\zeta^2}t)]$\\
+	
+	Or we can write $y = Re^{-\omega_0 \zeta t}cos(\omega_0 \sqrt{1 - \zeta^2}t - \phi)$\\
+	
+	The values of R and $\phi$ will depend on $y(0)$ and $y'(0)$ bein in general we get \underline{overdamped} behaviour.\\
+	
+	Note: The frequency is $\omega_0\sqrt{1 - \zeta^2}i$ as $\zeta$ increases the oscillations slow down!\\
+	
+	\subsubsection*{Case 2 $\zeta \epsilon (1, \infty)$}
+	Here we get $m = -\omega_0\zeta \pm \omega_0 \sqrt{\zeta^2 - 1}$ and $y = C_1 e^{-\omega_0(\zeta + \sqrt{\zeta^2 - 1})t} + C_2e^{-\omega_0(\zeta-\sqrt{\zeta^2 - 1})t}$
+	
+	We call this overdamped motion\\
+	
+	\subsubsection*{Case 4 $\zeta = 1$}
+	This is critical damping. The graphs look very similar to the overdamped case\\
+	
+	
+	
+	
+\end{document}

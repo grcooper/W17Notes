@@ -550,6 +550,113 @@
 	
 	Be is:\\
 	$$y_{n+1} y_n + hf(t_{n-1}, y_{n-1})$$
+	\subsection*{Stability}
+	\subsubsection*{Stability of Forward Euler}
+	F.E. is $Y_{n+1} = y_n + hf(t_n,y_n)$\\
+	Test Equation: is $y'(t) = -\lambda y(t)$ for $\lambda > 0$\\
+	Applying FE to this problem:\\
+	$$y_{n+1} = y_n + h(-\lambda y_n)$$
+	$$y_{n+1} = y_n(1-h\lambda)$$
+	
+	Close form is: $y_n = y_0(1-h\lambda)^n$\\
+	True solution is: $y(t) = y_0e^{-\lambda t}$ which decays to 0 as $t \rightarrow \infty$\\
+	
+	Forward Euler goes to 0 when...\\
+	$|1-h\lambda| < 1$ or $-1 < 1-h\lambda < 1$\\\\
+	
+	Left size says $-1 < 1 - h\lambda$ or $-2 < -h\lambda$ or $h < \frac{2}{\lambda}$\\
+	Right side says\\
+	$1 - h\lambda < 1$ or $-h\lambda < 0$ or $h > 0$\\
+	Hence numerical solution decays to 0\\
+	for $0 < h < \frac{2}{\lambda}$ Otherwise it "blows up"\\
+	
+	If we perturb the initial condiiton by some error $\epsilon_0$, how does it propagate?\\
+	$$y_0^{(p)} = y_0 + \epsilon_0 \rightarrow y_n^{(p)} = (y_0 + \epsilon_0)(1-h\lambda)^n$$
+	Hence error is $\epsilon_n = y_n^{(0)} - y_n = \epsilon_0(1-h\lambda)^n$\\
+	$\therefore$ error follows the same behaviour blows up for $h > \frac{2}{\lambda}$
+	
+	Forward Euler is "conditionally stable" ie. stable when the stability ocndition is satisfied.\\
+	
+	\subsubsection*{Stability of Backwards Euler}
+	BE is $y_{n+1} = y_n + hf(t_{n+1}, y_{n+1})$\\
+	Plug in test equation:\\
+	$$y_{n+1} = y_n + h(-\lambda y_{n+1})$$
+	$$y_{n+1} = \frac{y_n}{(1+h\lambda)}$$
+	Closed form:
+	$$y_n = \frac{y_0}{(1+h\lambda)^n}$$
+	
+	Perturbing $y_0$ by $\epsilon_0$ as before gives:\\
+	$$\epsilon_n = \frac{\epsilon_0}{(1+h\lambda)^n}$$
+	We need $|1 + h\lambda| > 1$, but since $h > 0$ and $\lambda > 0$ error decreases for any h\\
+	
+	In general, implicit schemes are more stable than explicit. Usually this stability comes at the cost of more expensive calculations per step.\\
+	
+	Note: Stability does not imply accuracy! Large steps will still cause large (truncation) error, even if a scheme is unconditionally stable.\\
+	
+	\subsubsection*{Stability of Improved Euler}
+	IE is $y_{n+1}* = y_n + hf(t_n,y_n)$\\
+	$y_{n+1} = y_n + \frac{h}{2}[f(t_n, y_n) + f(t_{n+1}, y_{n+1}*)]$\\
+	Plug in Test equation ($y'(t) = -\lambda y(t)$ for $\lambda > 0$\\
+	1: $y_{n+1}* = y_n + h(-\lambda y_n)$\\
+	2: $y_{n+1} = y_n - \frac{h}{2}\lambda y_n - \frac{h\lambda}{2}y_{n+1}*$\\
+	
+	Plug 1 into 2:\\
+	$$y_{n+1} = y_n - \frac{h\lambda}{2}y_n - \frac{h\lambda}{2}(y_n - h\lambda y_n)$$
+	$$y_{n+1} = y_n - h\lambda y_n + \frac{h^2\lambda^2}{2}y_n$$
+	$$y_{n+1} = y_n(1-h\lambda + \frac{h^2\lambda^2}{2})$$
+	
+	Again the error behaves likewise so closed for mis $\epsilon_n = \epsilon_0(1-h\lambda + \frac{h^2\lambda^2}{2})^n$\\
+	
+	Therefore stable when:\\
+	$$|1-h\lambda + \frac{h^2\lambda^2}{2} | < 1$$
+	ie:\\
+	$$-1 < 1-h\lambda+ \frac{h^2\lambda^2}{2} < 1$$
+	After some algebra:\\
+	$$0 < h < \frac{2}{\lambda}$$
+	ie the same conditional stability as FE\\
+	
+	\myt{From Jan 6th}\\
+	
+	\subsection*{Process For finding truncation error}
+	\subsubsection*{Taylor Series Reminder}
+	$$f(x) = f(a) + (x-a)f'(a) + \frac{(x-a)^2f''(a)}{2!} + \frac{(x-a)^3f'''(a)}{3!} ...$$
+	
+	\subsubsection*{Truncation error of Trapezoidal}
+	\begin{enumerate}
+		\item Replace RHS data with exact values:\\
+		 $y_{n+1} = y_n + \frac{h}{2}(f(t_n,y_n) + f(t_{n+1}, y_{n+1})$\\
+		 $\rightarrow$ $y_{n+1} = y(t_n) + \frac{h}{2}y'(t_n) + \frac{h}{2}y'(t_{n+1})$
+		\item Taylor series expand RHS Quantities about time $t_n$:\\
+		$y'(t_{n+1}) = y'(t_n) + hy''(t_n) + \frac{h^2}{2}y'''(t_n) + O(h^3)$\\
+		Plug Back in:\\
+		$y_{n+1} = y(t_n) + \frac{h}{2}[h'(t_n) + y'(t_n) + hy''(t_n) + \frac{h^2}{2}y'''(t_n) + O(h^3)]$\\
+		$= y(t_n) + hy'(t_n) + \frac{h^2}{2}y''(t_n) + \frac{h^3}{4}y'''(t_n) + O(h^4)$
+		\item Exact taylor series is:\\
+		$y(t_{n+1}) = y(t_n) + hy'(t_n) + \frac{h^2}{2}y''(t_n) + \frac{h^3}{6}y'''(t_n) + O(h^4)$
+		\item The Difference is:\\
+		$LTE = y(t_{n+1}) - y_{n+1} = h^3[\frac{1}{6} - \frac{1}{4}]y'''(t_n) + O(h^4)$\\
+		$= \frac{-1}{12}h^3y'''(t_n) + O(h^4)$\\
+		$= O(h^3)$
+	\end{enumerate}
+	
+	\subsubsection{Truncation of BDF2}
+	$y_{n+1} = \frac{4}{3}y_n - \frac{1}{3}y_{n-1} + \frac{2}{3}hf(t_{n+1}, y_{n+1})$\\
+	\begin{enumerate}
+		\item Replace RHS data with exact data\\
+		$y_{n+1} = \frac{4}{3}y(t_n) - \frac{1}{3}y(t_{n-1}) + \frac{2h}{3}y'(t_{n+1})$\\
+		\item Taylor expand RHS Quantities about time t\\
+		$y'(t_{n+1}) = y'(t_n) + hy''(t_n) + \frac{h^2}{2}y'''(t_n) + O(h^3)$\\
+		$y(t_{n-1}) = y(t_n) - hy'(t_n) + \frac{h^2}{2}y''(t_n) - \frac{h^3}{6}y'''(t_n) + O(h^4)$\\
+		Plugging in we find:\\
+		$y_{n+1} = \frac{4}{3}y(t_n) - \frac{1}{3}[y(t_n) - hy'(t_n) + \frac{h^2}{2}y''(t_n) - \frac{h^3}{6}y'''(t_n) + O(h^4)] + \frac{2h}{3}[y'(t_n) + hy''(t_n) + \frac{h^2}{2}y''(t_n) + O(h^3)]$\\
+		$= \frac{4}{3}y(t_n) - \frac{1}{3}y(t_n) + \frac{h}{3}y'(t_n) - \frac{h^2}{6}y''(t_n) + \frac{h^3}{18}y'''(t_n) + O(h^4) + \frac{2}{3}hy'(t_n) + \frac{2}{3}h^2y''(t_n) + \frac{2h^3}{6}y'''(t_n) + O(h^4)$\\
+		$y_{n+1} = y(t_n) + hy'(t_n) + \frac{h^2}{2}y''(t_n) + \frac{7}{18}h^3y'''(t_n) + O(h^4)$
+		\item True series is:\\
+		$y(t_{n+1}) = y(t_n) + hy'(t_n) + \frac{h^2}{2}y''(t_n) + \frac{h^3}{6}y'''(t_n) + O(h^4)$\\
+		\item $LTE = y(t_{n+1}) - y_{n+1}$\\
+		$= [\frac{1}{6} - \frac{7}{18}]h^3y'''(t_n) + O(h^4)$\\
+		$= O(h^3)$
+	\end{enumerate}
 	
 	
 	

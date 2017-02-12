@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}TITLE\vspace{-1ex}}
+\date{Feb. 2nd, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	End of last lecture (which I missed) \\
+	
+	For $y'' + py' + qy = 0$ (p,q $\epsilon R$)\\
+	$e^{mx}$ is a solution if $m = \frac{-p \pm \sqrt{p^2 - 4q}}{2}$\\
+	(solution to $m^2 + pm + q = 0$)\\
+	Case 1: $p^2 > 4q$ (2 real roots)\\
+	
+	The two functions $e^{m_1x}$ and $e^{m_2x}$ using the value of m's from above ($\pm$)\\
+	This is the characteristics equation of the DE are both solutions. They are linearly independent, and so the general solution is:\\
+
+	\myt{Example:} Solve the NP $y'' - y' - 2y = 0$, $y(0) = 0$, $y'(0) = 2$\\
+	Solution: The char. eqn is $m^2 - m - 2 = 0$ ie $(m-2)(m+1) = 0$, so $m = 2, -1$\\
+	
+	The general solution is $y = C_1e^{2x}+C_2e^{-x}$ $(y' = 2C_1e^{2x}-C_2e^{-x})$\\
+	Enforcing hte initial conditions,\\
+	$y(0) = 0 \rightarrow 0 = C_1 + C_2$\\
+	$y'(0) = 2 \rightarrow 2 = 2C_1 - C_2$\\
+	$2 = 3C_1$ so $C_1 = \frac{2}{3}$, $C_2 = \frac{-2}{3}$\\
+	So $y = \frac{2}{3}(e^{2x}-2^{-x})$\\
+	
+	Case 2: $p^2 < 4q$ (Complex Roots)\\
+	Here we can again say that the soution is\\\
+	$y = C_1e^{m_1x} + C_2e^{m_2x}$
+	$= C_1e^{(\alpha + i\beta)x} + C_2e^{(\alpha - i\beta)x}$\\
+	WE can write this in terms of real-valued functions.\\
+	$$y = e^{\alpha x}[C_1e^{i\beta x} + C_2e^{-i\beta x}]$$
+	$$= e^{\alpha x}[C_1*(cos(\beta x) + isin(\beta x) + C_2(cos(\beta x) - isin(\beta x)]$$
+	$$= e^{\alpha x}[(C_1 + C_2)cos(\beta x) + i(C_1 - C_2)sin(\beta x)]$$
+	$$= e^{\alpha x}(Acos(\beta x) + Bsin(\beta x))$$
+	Where $A = C_1 + C_2$ and $B = i(C_1 - C_2)$\\
+	
+	\myt{Example:} Find the general solution: $y'' + 2y' + 5y = 0$\\
+	Solution: The char. eqation is \\
+	$m^2 + 2m + 5 = 0$\\
+	$(m + 1)^2 + 4 = 0$\\
+	$m = -2 \pm 2i$\\
+	$\rightarrow y = e^{-x}(C_1cos(2x) + C_2sin(2x))$\\
+	
+	\myt{Example:} Solve the IVP $y'' + 4y' + 5y = 0$, $y(0) = 2$, $y'(0) = 1$\\
+	This time:\\
+	$m^{2} + 4m + 5 = 0$\\
+	$(m+2)^2 + 1 = 0$\\
+	$m = -2 \pm i$\\
+	$\rightarrow y = e^{-2x}(C_1cos(x) + C_2sin(x))$\\
+	
+	Enforce the ICs:\\
+	$$y' = -2e^{-2x}(C_1cos(x) + C_2sin(x)) + e^{-2x}(-C_1sin(x) + C_2cos(x))$$
+	$y(0) = 2 \rightarrow C_1 = 2$\\
+	$y'(0) = 1 \rightarrow -2C_1 + C_2 = 1 \rightarrow C_2 = 5$\\
+	
+	Thus, $y = e^{-2x}(2cos(x) + 5sin(x))$\\
+	
+	Case 3: $p^2 = 4q$ (Repeated roots)\\
+	If $p^2 = 4q$ we get only one exponential solution. There must be a second solution which si not an exponentional\\
+	
+	Here's how it was found:\\
+	An equation with 2 identical roots should not differ much from an equation with 2 \underline{nearly} identical roots.\\
+	Eg: Compare $y'' + 2y' + y = 0$ to $y'' + 2.001y' + y = 0$\\
+	
+	So, suppose a DE has two roots, m and m + $\epsilon$.\\
+	$y = C_1e^{mx} + C_2e^{m+\epsilon}x$\\
+	
+	As $\epsilon \rightarrow 0$ It looks like we only get one family of solutions:\\
+	$y = (C_1 + C_2)e6{mx}$ however, suppose:
+	$C_1$ and $C_2$, depend on $\epsilon$\\
+	
+	Consider the oslution:\\
+	$y = \frac{1}{\epsilon}e^{m+\epsilon}x - \frac{1}{\epsilon}e^{mx}$\\
+	$= e^{mx}[\frac{e^{\epsilon x} - 1}{\epsilon}]$\\
+	$lim_{\epsilon \rightarrow 0}(\frac{e^{\epsilon x} - 1}{\epsilon}) = lim_{\epsilon \rightarrow 0}\frac{xe^{\epsilon x}}{1} = x$\\
+	
+	Therefore $xe^{mx}$ is a solution to the equation with $\epsilon = 0$. That is, the general solution for Case 3 is $y = C_1e^{mx} + C_2xe^{mx}$\\
+	
+	\myt{Example:} Solve $y'' + 6y' + 9y = 0$\\
+	Solution: $m^2 + 6m + 9 = 0 \iff (m+3)^2 = 0 \rightarrow m = -3$\\
+	
+	The general solution is $y = C_1e^{-3x} + C_2xe^{-3x}$\\
+	
+	\myt{Example:} Solve $y'' + 4y' + 4y 2e^{-2x} + 4x$\\
+	$y_h = C_1e^{-2x} + C_2xe^{-2x}$\\
+	$y_p = Ae^{-2x}$ will fail, so we usually multiply by x, but that will also fail. Try multiplying by x again!\\
+	$y_p = Ax^2e^{-2x} + Bx + C$\\	
+	
+\end{document}
