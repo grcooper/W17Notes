@@ -136,6 +136,89 @@
 	\subsubsection*{Case 4 $\zeta = 1$}
 	This is critical damping. The graphs look very similar to the overdamped case\\
 	
+	\subsection*{Forced Oscillations}
+	
+	\subsubsection*{Simple Case:}
+	 A constant force. With a constant force applied to the mass. We have:\\
+	
+	$$x'' + 2\omega_0 \zeta x' + \omega_0^2 x = f_0$$
+	The solution will be: $x_h + x_p$ where $x_h$ is as we disucssed last time and $x_p = \frac{f_0}{\omega_0^2}$
+	
+	Guess: $x_p = A$, $x_p' = 0$, $x_p'' = 0$ and so:\\
+	$0 + 0 + \omega_0^2A = f_0$ so $A = \frac{f_0}{\omega_0^2}$\\
+	Interpolation? The equilibirum position moves by a distance:\\
+	$\frac{f_0}{\omega_0^2}$
+	
+	\subsubsection*{Harder case}
+	Oscillatory forcing:\\
+	Suppose:\\
+	$$x'' + 2\omega_0 \zeta x' + \omega_0^2 x = f_0cos(\omega_0t)$$
+	
+	A recap might be helpful before finishing the nondimensionalization. For a mechanical oscillator we consider:\\
+	$$mx'' + cx' + kx = F_0cos(\omega t)$$
+	Defining $\omega_0 = \sqrt{\frac{k}{m}}$ and $\zeta = \frac{c}{2\omega_0 m}$\\
+	Letting y = x, we get $y'' + 2\omega_0 \zeta y' + \omega_0^2 y = f_0 cos(\omega t)$\\
+	
+	For an electrical Oscillator:\\
+	$$Lq'' + Rq' + \frac{1}{C}q = V_0 cos(\omega t)$$
+	Defining $\omega_0 = \frac{1}{\sqrt{LC}}$, $\zeta = \frac{R}{2\omega_0 L}$, and $f_0 = \frac{V_0}{L}$\\
+	Leting y = q we get the above\\
+	
+	Now we have:\\
+	\begin{itemize}
+		\item $[y] = L or Q$
+		\item $[t] = T$
+	\end{itemize}
+	and constants:\\
+	\begin{itemize}
+		\item $[\omega_0] T^{-1}$
+		\item $[\omega] = T^{-1}$
+		\item $[f_0] = LT^{-2}$ or $QT^{-2}$
+	\end{itemize}
+
+	Lets let $t_c = \frac{1}{\omega_0}$ and $y_c = \frac{f_0}{\omega_0^2}$\\
+	Define $\tau = \frac{t}{t_c} = \omega_0 t$ and $y = \frac{y}{y_c} = \frac{\omega_0^2 y}{f_0}$\\
+	
+	With these:\\
+	$\frac{dy}{dt} = \frac{dy}{dY} \frac{DY}{d\tau}\frac{d\tau}{dt} = (\frac{f_0}{\omega_0^2})\frac{dY}{d\tau}(\omega_0) = \frac{f_0}{\omega_0}\frac{dY}{d\tau}$\\
+	And:\\
+	$\frac{d^2y}{dt^2} = \frac{d}{dt}(\frac{dy}{dt}) = \frac{d}{dt}(\frac{f_0}{\omega_0}\frac{dY}{d\tau})$\\
+	$= \frac{f_0}{\omega_0}\frac{d}{d\tau}(\frac{dY}{d\tau})\frac{d\tau}{dt}$\\
+	$= (\frac{f_0}{\omega_0})\frac{d^2Y}{d\tau^2}(\omega_0) = f_0\frac{d^2Y}{d\tau^2}$\\
+	
+	Our DE becomes:\\
+	$$f_0\frac{d^2Y}{d\tau^2} + 2\omega_0\zeta(\frac{f_0}{\omega_0})\frac{dY}{d\tau} + \omega_0^2(\frac{f_0Y}{\omega_0^2}) = f_0 cos(\omega(\frac{\tau}{\omega_0}))$$
+	That is, :\\
+	$$\frac{d^2Y}{d\tau^2} + 2\zeta \frac{dY}{d\tau} + y = cos(\Omega\tau)$$
+	Where $\Omega = \frac{\omega}{\omega_0}$\\
+	
+	\subsubsection*{Finding a particular solution}
+	Can simply guess $Y_p = Acos(\Omega\tau) + Bsin(\Omega\tau)$ (Try it!)\\
+	Alternatively we can use complex numbers as a shortcut:\\
+	We take our equation: $y'' 2\zeta y' + y = cos(\Omega\tau)$\\
+	And add: $i\Xi'' + 2\zeta i \xi' + i\xi = isin(\Omega\tau)$
+	We get: $Z'' + 2\zeta z' + z = e^{i\Omega\tau}$\\
+	Where $y = i \xi = z$\\
+	
+	If we can find $z_p$ then $y_p = R_e(z_p)$\\
+	
+	For $z_p$ we guess $z = \alpha e^{i\Omega\tau}$ where $\alpha \epsilon Complex$\\
+	The $z' = i\alpha \Omega e^{i\Omega\tau}$\\
+	And $z'' = -\alpha\Omega^2e^{i\Omega\tau}$\\
+	
+	Plug into the DE:\\
+	$$-\alpha\Omega^2e^{i\Omega\tau} + 2i\alpha\Omega\zeta e^{i\Omega\tau} + \alpha e^{i\Omega\tau} = e^{i\Omega\tau}$$
+	$$\rightarrow \alpha[1 - \Omega^2] + 2i \alpha \Omega \zeta = 1$$
+	$$\rightarrow \alpha = \frac{1}{[1-\Omega^2] + 2i\Omega\zeta}$$
+	$$ = \frac{1}{\sqrt{(1 - \Omega^2)^2 + 4\Omega\zeta^2}e^{i\delta}}$$
+	Where $tan(\delta) = \frac{2\Omega\zeta}{1 - \Omega^2}$\\
+	$$= \frac{e^{-i\delta}}{\sqrt{(1-\Omega^2)^2 + 4\Omega^2\zeta^2}}$$
+	We can conlude that:\\
+	$z_p = \alpha e^{i\Omega\tau} = Ae^{-i\delta}{e^{i\Omega\tau}}$\\
+	$= Ae^{i(\Omega\tau - \delta)}$\\
+	Therefore $Y_p = Acos(\Omega\tau - \delta)$\\
+	Where $A = \frac{1}{\sqrt{(1-\Omega^2)^2 + 4\zeta^2\Omega^2}}$ and $tan(\delta) = \frac{2\Omega\zeta}{1-\Omega^2}$\\
+	
 	
 	
 	
