@@ -219,6 +219,27 @@
 	Therefore $Y_p = Acos(\Omega\tau - \delta)$\\
 	Where $A = \frac{1}{\sqrt{(1-\Omega^2)^2 + 4\zeta^2\Omega^2}}$ and $tan(\delta) = \frac{2\Omega\zeta}{1-\Omega^2}$\\
 	
+	We'll call $y_h$ the \underline{transient} part of the solution, since $y_h \rightarrow 0$ as $\tau \rightarrow \infty$ (if $\zeta > 0$)\\
+	We call $y_p$ the \underline{steady-state} solution\\
+	
+	\subsubsection*{Analysis of the steady-state}
+	\begin{enumerate}
+		\item The Aplituted response function: It will help to think of $\zeta$ as fixed and $\Omega$ as being a variable. $A = A(\Omega)$
+		We can see that:
+		\begin{enumerate}
+			\item $A(\Omega) \rightarrow 1$ as $\Omega \rightarrow 0$ for any $\zeta$
+			\item $A(\Omega) \rightarrow 0$ as $\Omega \rightarrow \infty$ for any $\zeta$
+			\item If $\zeta = 0$, $A = \frac{1}{\sqrt{(1-\Omega^2)^2}} = \frac{1}{|l - \Omega^2|}$
+			\item We can show that $A'(\Omega) = 0$ when $\Omega = \sqrt{1-2\zeta^2}$ (if $\zeta < \frac{1}{\sqrt{2}})$
+		\end{enumerate}
+		\item The Phase Response Function, $\delta(\Omega)$\\
+		We have $tan(\delta) = \frac{2\Omega\zeta}{1-\Omega^2}$\\
+		In order to make sure that $\delta > 0$ we have to let:\\
+		$\delta = tan^{-2}(\frac{2\Omega\zeta}{1-\Omega^2})$ for $\Omega \epsilon (0,1)$\\
+		$\delta = \frac{\pi}{2}$ for $\Omega = 1$\\
+		$\delta = tan^{-1}(\frac{2\Omega\zeta}{1-\Omega^2}) + \pi$ for $\Omega \epsilon (1, \infty)$
+	\end{enumerate}
+	
 	
 	
 	
