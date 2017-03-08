@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Lecture 11\vspace{-1ex}}
+\date{March 3rd, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	Missed a couple of classes...
+	
+	\section*{Working with Piecewise-Defined Functions}
+	To extend our method to IVPs with piecewise-defined functions, we need a simple, \underline{standard} way of expressing them. We will use this:\\
+	
+	\subsection*{Definition: The Heaviside function (Aka the Unit Step function) is defined as:}
+	$H(t) = 0$ when $t < 0$ and $H(t) = 1$ when $t \ge 0$\\
+	\subsubsection*{Examples:}
+	eg $e^{-t}H(t) = 0$ for $t < 0$ and $e^{-t}$ for $t \ge 0$\\
+	
+	We can shift this effect:\\
+	$(4 - t^2)H(t-1) = 0 $ for $t < 1$ and $4-t^2$ for $t \ge 1$\\
+	
+	We can use H(t) to express almost any piecewise-defined fuction\\
+	
+	ie: Sketch the graph of $f(t) = t^2 + (t-t^2)H(t) + (1-t)H(t-1)$\\
+	Solution:\\
+	For $t < 0$ $f(t) = t^2 + 0 + 0 = t^2$\\
+	For $0 \le t < 1$ $f(t) = t^2 + (t-t^2) + 0 = t$\\
+	For $t \ge 1$ $f(t) = t^2 + (t-t^2) + (1-t) = 1$\\
+	
+	We'll need to do this in reverse:\\
+	eg. Write $f(t) = |t|$ in terms of $H(t)$\\
+	$|t| = -t$ for $t < 0$ and $t$ for $T \ge 0$\\
+	Then: $f(t) = -t + 2tH(t)$\\
+	Comment: There are other ways to do this, however our standard strucutre will (always) be:
+	$$f(t) = \underline{...} + \underline{...} H(t-a) + \underline{...} H(t-b) + \underline{...} H(t-c) + ...$$
+	Exxample: Rewrite:\\
+	$f(t) = 2t + 4$ for $t < -1$ and $3$ for $t \epsilon [-1, 1)$ and $3t$ for $t \epsilon [1, \infty)$\\
+	
+	Solution:\\
+	We want $f(t) = \_ + \_H(t+1) + \_H(t-1)$\\
+	Filling in the blanks:\\
+	$$f(t) = (2t + 4) + (-2t - 1)H(t+1) + (3t - 3)H(t-1)$$\\
+	
+	In general:\\
+	$f(t) = $ $f1$ if $t < a$, $f2$ if $t \epsilon [a,b)$ $f3$ if $t \ge b$\\
+	$$f(t) = f1 + (f2 - f1)H(t-a) + (f3-f2)H(t-b)$$
+	
+	There are a couple of tricks which may be useful:\\
+	\begin{itemize}
+		\item Consider 1 - H(t-a) this is $1$ for $t < a$ and $0$ for $t \ge a$ (an off switch)
+		\item Consider $H(t-a) - H(t-b)$ where $a < b$ = $0$ for $t < a$ and $1$ for $a \le t \le b$ and $0$ for $t \ge b$
+	\end{itemize}
+	
+	\subsection*{The Second Shift Theorem}
+	What is $L\{H(t)\}$? It's $L\{H(t)\} = \int_0^{\infty}H(t)e^{-st}dt$\\
+	$= \int_0^{\infty}e^{-st}dt = L{1} = \frac{1}{S^2}$ for $s > 0$\\
+	
+	More generally: $L\{f(t)H(t)\} = L\{f(t)\} = F(s)$\\
+	From now on we'll write our fomulas as:\\
+	
+	\begin{tabular}{c | c}
+		$L\{H(t)\} = \frac{1}{S}$ & $L^-1\{\frac{1}{S}\} = H(t)$\\
+		$L\{e^{at}H(t)\} = \frac{1}{S-a}$ & $L^{-1}\{\frac{1}{S-a} \} = e^{at}H(t)$\\
+		etc & etc 
+	\end{tabular}
+	
+	What happens to H(t-a)?\\
+	$L\{H(t-a)\} = \int_0^{\infty}H(t-a)e^{-st}dt$\\
+	$ = \int_0^a 0 * e^{-st}dt + \int_a^{\infty} 1 * e^{-st}dt$\\
+	$ = 0 - \frac{e^{-st}}{S} \_a^{\infty} = \frac{e^{-as}}{S}$\\
+	And now the big question, what about $F(t)H(t-a))$\\
+	
+	\subsubsection*{Proof}
+	$L\{f(t-a)H(t-a)\} = e^{-as}F(s)$\\
+	$\therefore L\{f(t-a)H(t-a)\} = \int_0^{\infty}e^{-st}f(t-a)H(t-a)dt$\\
+	We let $\tau = t-a$ and $d\tau = dt$\\
+	$ = \int_{-a}^{\infty}e^{-s(\tau +a)}f(\tau)H(\tau)d\tau$\\
+	$= \int_{-a}^{0}0d\tau + e^{-as}\int_0^{\infty}e^{-s\tau}f(\tau)d\tau$
+	$= e^{-as}F(s)$\\
+	
+	\begin{tabular}{ c | c }
+		$L\{H(t)\} = \frac{1}{S}$ & $L^{-1}\{ \frac{1}{S} \} = H(t)$ \\
+		$L\{ e^{at}H(t) \} = \frac{1}{S-a}$ & $L^{-1}\{\frac{1}{S-a} \} = e^{at}H(t)$ \\
+		$L\{t^n H(t)\} = \frac{n!}{S^{n+1}}$ & $L^{-1}\{\frac{n!}{S^{n-1}} \} = t^n H(t)$ \\
+		$L\{ cos atH(t) \} = \frac{S}{S^2 + a^2}$ & $L^{-1}\{\frac{S}{S^2 + a^2} \} = cos at H(t)$\\
+		$L\{sin at H(t) \} = \frac{a}{S^2 + a^2}$ & $L^{-1}\{\frac{a}{S^2+a^2} \} = sin at H(t)$\\
+		$L\{f(t-a)H(t-a)\} = e^{-as}F(s)$ & $L^{-1}\{ e^{-as}F(s)\} = f(t-a)H(t-a)$\\
+		$L\{e^{at} f(t)\} = F(s-a)$ & $L^{-1}\{F(s-a) \} = e^{at}f(t)$ \\
+	\end{tabular}
+		
+	\subsubsection*{Using the 2nd shift theorem}
+	Example1)\\
+	Let f(t) = t for $t \epsilon [0,2)$ and 0 for $t \ge 2$\\
+	Find F(s)\\
+	Solution:\\
+	Write $f(t) = t[H(t) - H(t-2)] = tH(t) - tH(t-2) = tH(t) - (t-2+2)H(t-2)$
+	$ = t * H(t) - (t-2)H(t-2) - 2H(t-2)$\\
+	and now we can see that:\\
+	$F(s) = \frac{1}{S^2} - \frac{e^{-2s}}{S^2} - \frac{e^{-2s}}{S}$\\
+	
+	2)\\
+	Find G(s) if g(t) = $\frac{1}{3}t$ for $t \epsilon [0,3)$ and $2-\frac{1}{3}t$ for $t \epsilon [3,6)$ and 0 for $t \ge 6$\\
+	
+	Solution:\\
+	$$g(t) = \frac{1}{3}t[H(t) - H(t-3)] + (2-\frac{1}{3}t)[H(t-3) - H(t-6)]$$
+	$$=  \frac{1}{3}tH(t) + (2-\frac{2}{3}t)H(t-3) + (\frac{1}{3}t - 2)H(t-6)$$
+	$$= \frac{1}{3}tH(t) - \frac{2}{3}(t-3)H(t-3) + \frac{1}{3}(t-6)H(t-6)$$
+	$$\rightarrow G(s) = \frac{1}{3S^2} - \frac{2}{3S^2}e^{-3s} + \frac{1}{3S^2}e^{-6s}$$
+	
+	3)\\
+	Evaluate $L^{-1}\{\frac{e^{-S}}{S^2 + 1} \}$\\
+	Solution:\\
+	Since $L^{-1}\{\frac{1}{S^2  + 1} \} = sint H(t)$\\
+	We have $L^{-1}\{\frac{e^{-s}}{S^2 + 1} = sin(t-1)H(t-1) \}$\\
+	
+	4)\\
+	Find $L^{-1}\{\frac{e^{-3S}}{(S+1)^4} \}$\\
+	Solution:\\
+	$L^{-1}\{\frac{1}{(S+1)^4} \} = e^{-t}L^{-1}\{\frac{1}{S^4} \}$\\
+	$ = \frac{1}{6}e^{-t}L^{-1}\{ \frac{6}{S^4} \}$\\
+	$ = \frac{1}{6}t^3e^{-t}H(t)$\\
+	$\rightarrow L^{-1}\{\frac{e^{-3S}}{(S+1)^4} \} = \frac{1}{6}(t-3)^3e^{-(t-3)}H(t-3)$\\
+	
+	5)\\
+	Solve the IVP $\frac{dy}{dt} + 3y = f(t)$, y(0) = 0\\
+	where $f(t) = 3$ for $t \epsilon [0,10)$ and $6$ for $t \epsilon [10, 20)$ and 3 for $t \epsilon [20, 30)$ and 0 for $t \epsilon [30, \infty)$\\
+	
+	Solution:\\
+	$$y' + 3y = 3H(t) + 3H(t-10) - 3H(t-20) - 3H(t-30)$$
+	$$\rightarrow sY + 3Y = \frac{3}{S} + \frac{3}{S}e^{-10S} - \frac{3}{S}e^{-20S} - \frac{3}{S}e^{-30S}$$
+	$$\rightarrow Y(s) = \frac{3}{S(S+3)}[1 + e^{-10s} - e^{-20S} - e^{-30S}]$$
+	$$Y(s) = [\frac{1}{S} - \frac{1}{S+3}](1 + e^{-10S} - e^{-20S} - e^{30S})$$
+	$$\rightarrow y(t) = (1-e^{-3t})H(t) + (1 - e^{-3(t-10)})H(t-10) - (1-e^{-3(t-20)})H(t-20) - (1-e^{-3(t-30)})H(t-30)$$
+	
+	In piecewise-defined form:\\
+	$y(t) =$\\
+	$1-e^{-3t}$ for $t\epsilon [0, 10)$\\
+	$2 - (1 + e^{30})e^{-3t}$ for $ t\epsilon [10. 20)$\\
+	$1 - (1 + e^{30} - e^{60})e^{-3t}$ for $t \epsilon [20, 30)$\\
+	$- (1 + e^{30} - e^{60} - e^{90}) e^{-3t}$ for $t \epsilon [30, \infty)$\\
+	
+	6)\\
+	Solve the IVP $x'' + 3x' + 2x = f(t)$ x(0) = 1, x'(0) = -1\\
+	where $f(t) = = sin(t) H(t-\frac{\pi}{2})$\\
+	Solution:\\
+	Note that $f(t) = cos(t-\frac{\pi}{2})H(t-\frac{\pi}{2})$\\
+	So $(S^2X(s) - sx(0) - x'(0)) - 3(sX(s) - x(0)) + 2X(s)$\\
+	$= \frac{S}{S^2 + 1}e^{\frac{-\pi}{2}S}$\\
+	$\rightarrow (S^2 + 3S + 2)X(s) = s + 2 + \frac{S}{S^2 + 1}e^{\frac{-\pi}{2}S}$\\
+	$$\rightarrow x(s) = \frac{S+2}{(s+1)(s-2)} + \frac{se^{\frac{-\pi S}{2}}}{(S^2 + 1)(s+1)(s+2)}$$
+	
+	
+	
+\end{document}
