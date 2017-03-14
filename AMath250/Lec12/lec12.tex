@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Lecture\vspace{-1ex}}
+\date{March 13th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	Missed a class in here...
+	
+	\section*{Solving Homogeneous Vector DEs Continued}
+	
+	\subsection*{Case3: Repeated Eigenvalues}
+	Example:\\
+	$\overrightarrow{x}' = \begin{bmatrix}
+	4 & 1 \\ -1 & 2
+	\end{bmatrix} \overrightarrow{x}$\\
+	
+	$det(A - \lambda I) = det(\begin{bmatrix}
+	4 - \lambda & 1 \\ -1 & 2 - \lambda
+	\end{bmatrix})$\\
+	$= (4-\lambda)(2-\lambda) + 1$\\
+	$= \lambda^2 - 6\lambda + 9 = (\lambda - 3)^2$\\
+	So $\lambda = 3$\\
+	
+	Setting $(A - \lambda I)\overrightarrow{V} = \overrightarrow{0}$ gives\\
+	$\begin{bmatrix}
+	1 & 1 \\ -1 & -1
+	\end{bmatrix}
+	\begin{bmatrix}
+	v_1\\v_2
+	\end{bmatrix} = \begin{bmatrix}
+	0 \\ 0
+	\end{bmatrix}$\\\\
+	
+	So $v_1 + v_2 = 0$ and we may use $\overrightarrow{v} = \begin{bmatrix}
+	1 \\ -1
+	\end{bmatrix}$\\
+	
+	$\rightarrow$ One solution is $\overrightarrow{x_1} = \begin{bmatrix} 1 \\ -1\end{bmatrix} e^{3t}$\\
+	
+	What's a second one? Try multipying by t?\\
+	
+	IF $\overrightarrow{x_1} = \overrightarrow{v}e^{\lambda t}$ then we guess:\\
+	$\overrightarrow{x_2} = \overrightarrow{v}te^{\lambda t}$?\\
+	This gives $\overrightarrow{x_2}' = \overrightarrow{v}e^{\lambda t} + \lambda \overrightarrow{v}te^{\lambda t}$\\
+	ie. $\overrightarrow{v}e^{\lambda t} = \overrightarrow{0}$ which is not true!\\
+	
+	What else could we try?\\
+	
+	Consider: we have guessed: $\overrightarrow{x_2} = \overrightarrow{v}te^{\lambda t} = \begin{bmatrix}
+	v_1te^{\lambda t} \\ v_2te^{\lambda t}
+	\end{bmatrix}$\\
+	So:\\
+	$\overrightarrow{x} = c_1\overrightarrow{x_1} + c_2\overrightarrow{x_2} = \begin{bmatrix}
+	c_1v_1e^{\lambda t} + c_2v_1te^{\lambda t} \\ c_1v_2e^{\lambda t} + c_2v_2te^{\lambda t}
+	\end{bmatrix}$\\
+	
+	We \underline{want}\\
+	$\overrightarrow{x} = \begin{bmatrix}
+	\alpha_1 e^{\lambda t} + \alpha_2te^{\lambda t} \\
+	\alpha_3 e^{\lambda t} + \alpha_4 te^{\lambda t}
+	\end{bmatrix}$\\
+	Where $\alpha_{1-4}$ are related in some way so that there are only two arbitrary constants\\
+	
+	Our guess is too restrictive - it requires a particular relationship between fourc oncstants, one wayt to relax this restriction is this:\\
+	For $\overrightarrow{x_2}$, we guess $\overrightarrow{x_2} = \overrightarrow{v}te^{\lambda t} + \overrightarrow{u}e^{\lambda t}$ where $\overrightarrow{u}$ is a vector to be determined\\
+	
+	(This way $\overrightarrow{x}(t) = c_1\overrightarrow{x_1} + c_2\overrightarrow{x_2} = \begin{bmatrix}
+	(c_1v_1 + c_2u_1)e^{\lambda t} + c_2v_1te^{\lambda t} \\
+	(c_1v_2 + c_2u_2)e^{\lambda t} + v_2v_2te^{\lambda t}
+	\end{bmatrix}$\\
+	What is $\overrightarrow{u}$ ?\\
+	
+	Plug $\overrightarrow{x_2}$ into the DE: $\overrightarrow{x}' = A\overrightarrow{x}$ becomes \\
+	$\overrightarrow{v}e^{\lambda t} + \lambda\overrightarrow{v}te^{\lambda t} = A\overrightarrow{v}te^{\lambda t} + A\overrightarrow{u}e^{\lambda t}$\\
+	$\rightarrow A\overrightarrow{u} - \lambda\overrightarrow{u} = \overrightarrow{v}$\\
+	$\rightarrow (A-\lambda I)\overrightarrow(u) = \overrightarrow{v}$\\
+	
+	We can solve this for $\overrightarrow{u}$ In fact, $\overrightarrow{u}$ is called a generalized eigenvector. Note that $(A-\lambda I)^2 \overrightarrow{u} = (A-\lambda I)\overrightarrow{v} = \overrightarrow{0}$\\
+	Conclusion: The guess $\overrightarrow{x_2} = \overrightarrow{v}te^{\lambda t} + \overrightarrow{u}e^{\lambda t}$ works for $\overrightarrow{u}$ is a generalized eigenvector (of order 2)\\
+	
+	Back to the example....\\
+	
+	We had $A = \begin{bmatrix}
+	4 & 1 \\ -1 & 2
+	\end{bmatrix}$\\
+	$(A - \lambda I) = \begin{bmatrix}
+	1 & 1 \\ -1 & -1
+	\end{bmatrix}$\\
+	
+	To find $\overrightarrow{u}$ solve $(A 0 \lambda I)\overrightarrow{u} = \overrightarrow{v}$\\
+	ie: \\
+	$\begin{bmatrix}
+	1 & 1 \\ -1 & -1
+	\end{bmatrix}
+	\begin{bmatrix}
+	u_1 \\ u_2
+	\end{bmatrix} =
+	\begin{bmatrix}
+	1 \\ -1
+	\end{bmatrix}$\\
+	$u_1 + u_2 = 1$\\
+	
+	Setting $u_2 = 0$ gives $u_1 = 1$ so $\overrightarrow{u} = \begin{bmatrix}
+	1 \\ 0
+	\end{bmatrix}$
+	So...
+	$\overrightarrow{x_1} = \overrightarrow{v}e^{\lambda t}$\\
+	$\overrightarrow{x_2} = \overrightarrow{v}te^{\lambda t} + \overrightarrow{u}e^{\lambda t}$\\
+	
+	$\rightarrow$ the general solution is:\\
+	$$\overrightarrow{x} = c_1\overrightarrow{x_1} + c_2\overrightarrow{x_2}$$
+	$$= c_1\overrightarrow{v}e^{\lambda t} + c_2[\overrightarrow{v}te^{\lambda t} + \overrightarrow{u}e^{\lambda t}]$$
+	$$= c_1\begin{bmatrix}
+	1 \\ -1
+	\end{bmatrix} e^{3t} + c_2 [ \begin{bmatrix}
+	1 \\ -1
+	\end{bmatrix} te^{3 t} + \begin{bmatrix} 1 \\ 0 \end{bmatrix} e^{3t}$$
+	$$ = \begin{bmatrix}
+	(c_1 + c_2)e^{3t} + c_2te^{3t} \\-c_1e^{3t} - c_2te^{3t}
+	\end{bmatrix}$$
+	
+\end{document}

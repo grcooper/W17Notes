@@ -157,6 +157,99 @@
 	$\rightarrow (S^2 + 3S + 2)X(s) = s + 2 + \frac{S}{S^2 + 1}e^{\frac{-\pi}{2}S}$\\
 	$$\rightarrow x(s) = \frac{S+2}{(s+1)(s-2)} + \frac{se^{\frac{-\pi S}{2}}}{(S^2 + 1)(s+1)(s+2)}$$
 	
+	Example:\\
+	Solve hte IVP $x'' + 3x' + 2x = f(t)$ $x(0) = 1$, $x'(0) = -1$\\
+	Where $f(t) = sint H(t-\frac{\pi}{2})$\\
 	
+	Solution: First $sin(t) = cos(t - \frac{\pi}{2})$ so $f(t) = cos(t-\frac{\pi}{2})H(t-\frac{\pi}{2})$\\
 	
+	Applying the transofmration gives:\\
+	$$S^2X - sx(0) - x'(0) + 3sx - 3x(0) + 2x = \frac{S}{S^2 + 1}e^{\frac{\pi}{2}S}$$
+	$$\rightarrow x(s) = \frac{s+2}{(s+1)(s+2)} + \frac{se^{-\frac{\pi}{2}s}}{(s+1)(s+2)(s^2+1)}$$
+	$$= \frac{1}{s+1} + e^{-\frac{\pi}{2}s}[\frac{\frac{-1}{2}}{s+1} + \frac{\frac{2}{5}}{s+2} + \frac{\frac{1}{10}s + \frac{3}{10}}{s^2 + 1}]$$
+	
+	This gives us:\\
+	$$x(t) = e^{-t}H(t) + H(t-\frac{\pi}{2}) + [\frac{-1}{2}e^{-t} + \frac{2}{5}e^{\pi}e^{-2t} + \frac{1}{10}sin(t) - \frac{3}{10}cos(t)]$$
+	
+	\section*{Systems of First-Order Linear Equations}
+	In some applications (mixing tanks, chemical reactions etc) we find that he behaviour of multiple quantities are related to each other. In a relatively simple case, we might have:\\
+	\begin{enumerate}
+		\item $\frac{dx}{dt} = ax + by + f_1(t)$
+		\item $\frac{dy}{dt} = cx + dy + f_2(t)$
+	\end{enumerate}
+	
+	Since these are linear, it is possible to write the system in vector form.\\
+	Letting $\overrightarrow{x}(t) =
+	\begin{bmatrix}
+	x(t) \\ y(t)
+	\end{bmatrix}$
+	\\ we have:
+	$\begin{bmatrix}
+	x' \\ y'
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	a & b \\
+	c & d \\
+	\end{bmatrix}
+	\begin{bmatrix}
+	x \\ y
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+	f_1 \\ f_2
+	\end{bmatrix}
+	$\\
+	
+	More concisely, $\overrightarrow{x}' = A\overrightarrow{x} + \overrightarrow{f}(t)$\\
+	
+	Eg:\\
+	If $\frac{dx}{dt} = 2x - 3y + t$\\
+	and $\frac{dy}{dt} = x + 4y$\\
+	Then we would want to write:\\
+	$\overrightarrow{x}' = 
+	\begin{bmatrix}
+	2 & -3 \\ 1 & 4
+	\end{bmatrix}
+	\overrightarrow{x}
+	 +
+	 \begin{bmatrix}
+	 t \\ 0
+	 \end{bmatrix}$
+	 
+	 Observation:\\
+	 Every 1st-order linear 2 variable vector DE can be converted int a 2nd-order originary DE\\
+	 
+	 How? Notice that we can solve 1 for y:\\
+	 $$y = \frac{x'}{b} - \frac{a}{b}x - \frac{f_1(x)}{b}$$
+	 
+	 Therefore:\\
+	 $$\frac{dy}{dt} = \frac{x''}{b} - \frac{a}{b}x' - \frac{f_1'(t)}{b}$$
+	 and so 2 becomes (after simplifying):\\
+	 $$x'' + (a+d)x' + (ad-bc)x = f_1'(t) - df_1(t) + bf_2(t)$$
+	 
+	 It is also possible to express ODE's as vector DE's
+	 eg:\\
+	 Suppose $y'' + py' + qy = 0$ with $y(0) = y_0$ and $y'(0) = V_0$\\
+	 
+	 If we define $\overrightarrow{x}(t) = \begin{bmatrix}
+	 y \\ y'
+	 \end{bmatrix}$
+	 Then $\overrightarrow{x}' = \begin{bmatrix}
+	 y' \\ y''
+	 \end{bmatrix} = \begin{bmatrix}
+	 y' \\ -py' - qy
+	 \end{bmatrix} = \begin{bmatrix}
+	 0 & 1 \\ -p & -q
+	 \end{bmatrix} \begin{bmatrix}
+	 y\\ y'
+	 \end{bmatrix}$
+	 
+	 This tesllls us that the theory of ODE's can be extended to vector DE's!\\
+	 \begin{itemize}
+	 	\item The IVP $\overrightarrow{x}' = A\overrightarrow{x} + \overrightarrow{f}(t)$ with $\overrightarrow{x}(0) = \overrightarrow{x}_0$
+	 	\item a general solution will contain two arbitrary constants (and 2 linearly independent functions)
+	 	\item The Principle of superposition applies:\\
+	 	$\rightarrow$ we can adopt hte same basic stragey to solve $\overrightarrow{x}' = A\overrightarrow{x} + \overrightarrow{f}(x)$ we can proceed by solving $\overrightarrow{x_h} = A\overrightarrow{x_h}$ and then finding a particular solution $\overrightarrow{x_p}$ the gneeral solution will be $\overrightarrow{x} = \overrightarrow{x_h} + \overrightarrow{x_p}$
+	 \end{itemize}
 \end{document}
