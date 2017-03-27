@@ -1,0 +1,161 @@
+\documentclass[12pt]{article}
+
+\setlength\parindent{0pt}
+\newcommand{\myt}[1]{\textbf{\underline{#1}}}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{\vspace{-15ex}Solving Inhomogeneous Vector DE's\vspace{-1ex}}
+\date{March 20th, 2017}
+\author{Graham Cooper}
+
+\begin{document}
+	\maketitle
+	
+	\section*{Solving Inhomogenous Vector DE's}
+	
+	Thre options (at least) for solving 2nd-order linear equations:\\
+	\begin{enumerate}
+		\item Method of Undetermined coefficients
+		\item Variation of Parameters
+		\item Laplace transform
+	\end{enumerate}
+
+	All of these can be adopted for vector DE's\\
+	
+	\subsection*{1 Method of Undetermined coefficients}
+	This is the easiest method for very simple forcing terms $\overrightarrow{f}(t)$ (eg constants or forms like: $\begin{bmatrix}
+	k_1e^{at} \\ k_2e^{at}
+	\end{bmatrix})$
+	
+	It gets more difficult when $\overrightarrow{f}(t)$ is more complicated\\
+	
+	\subsubsection*{Example1}
+	Solve:\\
+	$\overrightarrow{x} = \begin{bmatrix}
+	1 & 1 \\ 0 & 2
+	\end{bmatrix} \overrightarrow{x} + \begin{bmatrix}
+	2 \\ 1
+	\end{bmatrix}$\\
+	Solution: Solve $\overrightarrow{x}' = A\overrightarrow{x}$ first $\overrightarrow{x_h} = C_1e^t\begin{bmatrix}
+	1 \\ 0
+	\end{bmatrix} + c_2e^{2t}\begin{bmatrix}
+	1 \\ 1
+	\end{bmatrix}$\\
+	
+	To find a particular solution we guess that:\\
+	$\overrightarrow{x_p} = \begin{bmatrix}
+	A \\ B
+	\end{bmatrix}$\\
+	
+	Plug this into the DE:\\
+	$\overrightarrow{0} = \begin{bmatrix}
+	1 & 1 \\ 0 & 2
+	\end{bmatrix} \begin{bmatrix}
+	A \\ B
+	\end{bmatrix}  + \begin{bmatrix}
+	2 \\ 1
+	\end{bmatrix}$\\
+	
+	ie:\\
+	$A + B = -2$ and $2B = -1$ so $B = \frac{-1}{2}$ and $A = \frac{3}{2}$\\
+	$\rightarrow \overrightarrow{x}(t) = \overrightarrow{x_h} + \overrightarrow{x_p} = C_1e^t \begin{bmatrix}
+	1 \\ 1
+	\end{bmatrix} + \begin{bmatrix}
+	\frac{-3}{2} \\ \frac{-1}{2}
+	\end{bmatrix}$\\
+	
+	\subsection*{2) Variation of Parameters}
+	Consider the equation: $\overrightarrow{x}' = A\overrightarrow{x} + \overrightarrow{f}(t)$\\
+	If hte solution to the homogeneous equation $\overrightarrow{x}' = A\overrightarrow{x}$ is $\overrightarrow{x_h} = C_1\overrightarrow{x_1} + C_2\overrightarrow{x_2}$ then we assume that the solution can be expressed as: $\overrightarrow{x} = u_1(t)\overrightarrow{x_1}(t) + u_2(t)\overrightarrow{x_2}(t)$\\
+	
+	Differentiating: $\overrightarrow{x} = u_1 \overrightarrow{x_1} + u_2 \overrightarrow{x_2}$\\
+	Gives: $\overrightarrow{x}' = u_1'\overrightarrow{x_1} + u_1\overrightarrow{x}' + u_2'\overrightarrow{x_2} + u_2\overrightarrow{x_2}'$ so:\\
+	$\overrightarrow{x}' = A\overrightarrow{x} + \overrightarrow{f}(t) \rightarrow$\\
+	$u_1'\overrightarrow{x_1} + u_1' \overrightarrow{x_1}' + u_2'\overrightarrow{x_2} + u_2 \overrightarrow{x_2}' = Au_1\overrightarrow{x_1} + Au_2\overrightarrow{x_2} + A\overrightarrow{f}$\\
+	
+	Now by assumption: $\overrightarrow{x_1}' = A\overrightarrow{x}$ and $\overrightarrow{x_2}' = A\overrightarrow{x_2}$ so $u_1' \overrightarrow{x_1} + u_2' \overrightarrow{x_2} = A \overrightarrow{f}$\\
+	
+	In component form:\\\\
+	$u_1'x_{11} + u_2'x_{21} = Af_1$\\
+	$u_1'x_{12} + u_2'x_{22} = Af_2$\\
+	
+	We will always be able to solve this for $u_1'$ and $u_2'$ because $\overrightarrow{x_1}$ and $\overrightarrow{x_2}$ are linearly independent functions, so the matrix $\begin{bmatrix}
+	\overrightarrow{x_1} & \overrightarrow{x_2}
+	\end{bmatrix}$ is invertible.\\
+	
+	Integrating gives $u_1$ and $u_2$ and hence $\overrightarrow{x}$\\
+	
+	\subsubsection*{Example:}
+	Solve $\overrightarrow{x}' = \begin{bmatrix} 1 & 1 \\ 4 & 1 \end{bmatrix} \overrightarrow{x} + \begin{bmatrix} t \\ e_t \end{bmatrix}$\\
+	Given that $\overrightarrow{x_h} = C_1 \begin{bmatrix} e^{3t} \\ 2e^{3t} \end{bmatrix} + C_2 \begin{bmatrix} e^{-t} \\ -2e^{-t} \end{bmatrix}$\\
+	
+	Note: to use the method of undetermined coefficients, we would guess:\\
+	$\overrightarrow{x_p} = \begin{bmatrix} A_1t + B_1 + C_1e^t \\ A_2t + B_2 + C_2e^t \end{bmatrix}$\\
+	
+	Using var. of parameters we set $\overrightarrow{x} = u_1\overrightarrow{x_1} + u_2\overrightarrow{x_2}$ and sove $u_1 \overrightarrow{x_1} + u_2\overrightarrow{x_2} = \overrightarrow{f}$\\
+	
+	ie:\\
+	$u_1'\begin{bmatrix} e^{3t} \\ 2e^{3t} \end{bmatrix} + u_2 \begin{bmatrix} e^{-t} \\ -2e^{-t} \end{bmatrix} = \begin{bmatrix} t \\ e_t \end{bmatrix}$\\
+	$u_1'e^{3t} + u_2'e^{-t} = t$ 1)\\
+	$2u_1'e^{3t} - 2u_2'e^{-t} = e^t$ 2)\\
+	
+	$2 * 1) + 2)$ gives $4u_1'e^{3t} = 2t + e^t$\\
+	$2 * 1) - 2)$ gives $4u_2'e^{-t} = t - e^t$\\
+	
+	$\rightarrow u_1' = \frac{1}{2}te^{-3t} - \frac{1}{4}e^{-2t}$\\
+	$\rightarrow u_1(t) = \int \frac{1}{2}t^{-3t}dt - \int \frac{1}{4}e^{-2t} dt$\\
+	let $u = t$ $dv = e^{-3t}dt$ and $du = dt$ $v = \frac{-1}{3}e^{-3t}$\\
+	$= \frac{1}{2}[\frac{-1}{3}te^{-3t} + \int \frac{1}{3}e^{-3t}dt] - \frac{1}{4} \int e^{-2t}dt$\\
+	$= \frac{-1}{6}te^{-3t} - \frac{1}{18}e^{-3t} + \frac{1}{8}e^{-2t} + C_1$\\
+	
+	Meanwhile $u_2' = \frac{1}{2}te^{t} - \frac{1}{4}e^{2t}$\\
+	$\rightarrow u_2 = ...$\\
+	$= \frac{1}{2}te^t - \frac{1}{2}e^t - \frac{1}{8}e^{2t} + C_2$\\
+	
+	Therefore $\overrightarrow{x} = u_1\overrightarrow{x_1} + u_2 \overrightarrow{x_2}$\\
+	$= (\frac{-1}{6}te^{-3t} - \frac{1}{18}e^{-3t} + \frac{1}{8}e^{-2t} + C_1)\begin{bmatrix}1 \\ 2 \end{bmatrix}e^{3t} + (\frac{1}{2}te^t - \frac{1}{2}e^t - \frac{1}{8}e^{2t} + C_2)\begin{bmatrix} 1 \\ -2 \end{bmatrix}e^{-t}$\\
+	$= ...$ SImplifications\\
+	$= c_1e^{3t}\begin{bmatrix}1 \\ 2\end{bmatrix} + c_2e^{-t}\begin{bmatrix} 1 \\ -2 \end{bmatrix} + \begin{bmatrix} \frac{1}{3}t - \frac{5}{9} - \frac{1}{4}e^t \\ \frac{-4}{3}t + \frac{8}{9} \end{bmatrix}$\\
+	
+	
+	\section*{The Fundamental Matrix}
+	There is a more convenient way to express general solutions to vector DEs using this.
+	\underline{Definition} The fundamental matrix of a DE $\overrightarrow{x}' = A\overrightarrow{x}$ is the matrix $\Phi(t)$ such that $\overrightarrow{x}(t) = \Phi(t)\overrightarrow{x}(0)$ That is: $\begin{bmatrix} \Phi_{11} & \Phi_{12} \\ \Phi_{21} & \Phi_{22} \end{bmatrix}\begin{bmatrix}x(0) \\ y(0) \end{bmatrix} = \begin{bmatrix} x(t) \\ y(t) \end{bmatrix}$\\
+	
+	We can always construct this matrix from the general solution; notice that the tsolution to the special case $\overrightarrow{x}(0) = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ is $\overrightarrow{x}(t) = \begin{bmatrix}\Phi_{11}(t) \\ \Phi_{12}(t) \end{bmatrix}$\\
+	
+	The solution to teh case $\overrightarrow{x}(0) = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ is $\overrightarrow{x}(t) = \begin{bmatrix} \Phi_{12} (t) \\ \Phi_{22} (t) \end{bmatrix}$\\
+	
+	\subsection*{Example}
+	The DE $\overrightarrow{x}' = \begin{bmatrix} 1 & -3 \\ 3 & 7 \end{bmatrix}\overrightarrow{x}$ has solution:\\
+	$\overrightarrow{x} = c_1e^{4t}\begin{bmatrix}1 \\ -1\end{bmatrix} + C_2te^{4t}\begin{bmatrix}1 \\ -1\end{bmatrix} + C_2e^{4t}\begin{bmatrix} \frac{-1}{3} \\ 0 \end{bmatrix}$\\
+	
+	Suppose $\overrightarrow{x}(0) = \begin{bmatrix} 1 \\ 0\end{bmatrix}$ then $1 = c_1 - \frac{1}{3}C_2$ and $0 = -C_1$\\
+	
+	$\rightarrow \overrightarrow{x}(t) = \begin{bmatrix} \Phi_{11}(t) \\ \Phi_{21}(t)\end{bmatrix} = \begin{bmatrix} -3te^{4t} + e^{4t} \\ 3te^{4t} \end{bmatrix}$\\
+	
+	Now suppose $\overrightarrow{x}(0) = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ Then $0 = C_1 - \frac{1}{3}C_2$ nad $1 = - c_1$\\
+	
+	So $\overrightarrow{x}(t) = \begin{bmatrix}
+	\Phi_{12}(t) \\ \Phi_{22}(t)
+	\end{bmatrix} = \begin{bmatrix} -3te^{4t} \\ 3te^{4t} + e^{4t} \end{bmatrix}$\\
+	
+	Therefore $\Phi(t) = \begin{bmatrix} -3te^{4t} + e^{4t} & -3te^{4t} \\ 3te^{4t} & 3te^{4t}+e^{4t} \end{bmatrix}$\\
+	
+	The general solution can now be expressed as $\overrightarrow{x}(t) = \Phi(t)\overrightarrow{x}(0)$\\
+	
+	So for example the solution for the IC $\overrightarrow{x}(0) = \begin{bmatrix}2 \\ 1 \end{bmatrix}$\\
+	is $\overrightarrow{x}(t) = \begin{bmatrix} -9te^{4t} + 2e^{4t} \\ 9te^{4t} + e^{4t} \end{bmatrix}$\\
+	
+	\subsection*{Properties of the Fundamental Matrix}
+	\begin{enumerate}
+		\item Notice that if $\overrightarrow{x}(t) = \Phi(t)\overrightarrow{x}(0)$ is the solution to $\overrightarrow{x}' = A\overrightarrow{x}$ then $\Phi '(t)\overrightarrow{x}(0) = A\Phi(t)\overrightarrow{x}(0)$ And so $\begin{bmatrix}
+		\Phi '(t) - A\Phi(t) \end{bmatrix} \overrightarrow{x}(0) = \overrightarrow{0}$\\
+		Therefore $\Phi '(t) - A\Phi(t)$ is the zero matrix so we may write $\Phi '(t) = A\Phi(t)$
+		\item Viewing $\Phi(t)$ as a mapping from $\overrightarrow{x}(0)$ to $\overrightarrow{x}(t)$ we can conclude that $\Phi(0) = I$ and $\Phi (t_1 + t_2) = \Phi (t_2)\Phi(t_1)$ A consequence of this: $\Phi(t - t) = \Phi(t) \Phi(t)$ and $\Phi^{-1}(t) = \Phi(-t)$\\
+	\end{enumerate}
+	
+\end{document}
