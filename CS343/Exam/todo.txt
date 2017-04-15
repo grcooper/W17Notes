@@ -9,24 +9,23 @@ Should do 1 chapter of review per day, and study for UI/Amath in the middle
 10/11th start review
 12th - finish review
 13th - Chapter 6/7
-14th - Chapter 7/8
-15th - UI
+14th - Chapter 8/9
+15th - Amath
 16th - Amath
 17th - Amath
-18th - Chapter 9
-19th - Chapter 10/11
+18th - Chapter 10/11
+19th - Sample Finals
 20th - Exam
 
 Review from midterm:
 Sections:
-- 3.1.3/4 (coroutine usage)
-- 3.2 (until fully understand full coroutines)
-- 4.5 (non-local exceptions)
-- 5.19.9/10 N-Thread bakery/tournament
-- Chapter 6.2/3 - (Quick review of which locks do what)
+- 3.1.3/4 (coroutine usage) - Done
+- 3.2 (until fully understand full coroutines) - Done
+- 4.5 (non-local exceptions) - Done
+- 5.19.9/10 N-Thread bakery/tournament - Done bakery - didn't look at tournament
+- Chapter 6.2/3 - (Quick review of which locks do what) - Went over briefly
 
 New Review is all chapters mentioned above, 6.4.2 to 11.5 not 11.4
 What to do for each chapter
 - Review and write notes
 - Write all of the big code examples in u++ and try them out
-- 
